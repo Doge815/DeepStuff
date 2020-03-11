@@ -1,6 +1,6 @@
 #pragma once
 
-#include "INetwork.hpp"
+#include "Network.hpp"
 
 #include<vector>
 

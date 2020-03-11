@@ -30,13 +30,10 @@ BackPropagateNetworkCollection::BackPropagateNetworkCollection(int amount, Netwo
 
 void BackPropagateNetworkCollection::Evolve()
 {
-    for (size_t i = 0; i < nets.size(); i++)
-    {
-        nets[i]->Learn();
-    }
 }
 
 vector<INetwork*> BackPropagateNetworkCollection::GetNetworks()
 {
-    return vector<INetwork*>();
+    vector<INetwork*> net(nets.begin(), nets.end());
+    return net;
 }

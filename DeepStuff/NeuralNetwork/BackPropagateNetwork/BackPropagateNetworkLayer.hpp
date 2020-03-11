@@ -102,7 +102,7 @@ vector<double> BackPropagateNetworkLayer::Activate(vector<double> value)
     vector<double> output = vector<double>();
     for(int i = 0; i < value.size(); i++)
     {
-        output.push_back(fmaxf64(0, value[i]));
+        output.push_back(value[i] > 0 ? value[i] : 0);
     }
     return output;
 }

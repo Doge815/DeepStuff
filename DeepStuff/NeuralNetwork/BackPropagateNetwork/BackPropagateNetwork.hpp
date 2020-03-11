@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../INetwork.hpp"
+#include "../Network.hpp"
 #include "../NetworkShape.hpp"
 #include "BackPropagateNetworkLayer.hpp"
 
@@ -37,7 +37,7 @@ vector<double> BackPropagateNetwork::Evaluate(vector<double> input)
 {
     vector<double> current = input;
 
-    for (size_t i = 0; i < Layers.size(); i++)
+    for (size_t i = 0; i < Layers.size() - 1; i++)
     {
         current = Layers[i].Evaluate(current);
     }

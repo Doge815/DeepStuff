@@ -22,6 +22,9 @@
     <Filter Include="Header Files\NeuralNetwork\BackPropagate">
       <UniqueIdentifier>{d3bd5af6-e0c6-42d8-9dcf-c29258d3d453}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Approximation">
+      <UniqueIdentifier>{8521980b-ba60-4ad1-ba92-069a7c38e78a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,9 +32,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\NeuralNetwork\INetwork.hpp">
-      <Filter>Header Files\NeuralNetwork\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\NeuralNetwork\NetworkShape.hpp">
       <Filter>Header Files\NeuralNetwork\Base</Filter>
     </ClInclude>
@@ -46,6 +46,12 @@
     </ClInclude>
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetwork.hpp">
       <Filter>Header Files\NeuralNetwork\BackPropagate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Network.hpp">
+      <Filter>Header Files\NeuralNetwork\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Approximation\Approximation.hpp">
+      <Filter>Header Files\Approximation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
