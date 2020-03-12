@@ -37,7 +37,7 @@ vector<double> BackPropagateNetwork::Evaluate(vector<double> input)
 {
     vector<double> current = input;
 
-    for (size_t i = 0; i < Layers.size() - 1; i++)
+    for (size_t i = 0; i < Layers.size(); i++)
     {
         current = Layers[i].Evaluate(current);
     }
@@ -66,9 +66,11 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
 
     error /= input.size();
     
-    for (int i = Layers.size() - 1; i >= 0; i--)
+
+    for (int u = Layers.size() - 1; u >= 0; u--)
     {
-        errorSignal = Layers[i].Train(errorSignal, Iout[i], Layers[i].ActivationInverse(Iout[i+1]));
+        vector<double> b = Layers[u].ActivationInverse(Iout[u+1]);
+        errorSignal = Layers[u].Train(errorSignal, Iout[u], b);
     }
 
     return error;

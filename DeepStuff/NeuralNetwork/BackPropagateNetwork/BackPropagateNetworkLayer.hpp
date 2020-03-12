@@ -48,6 +48,10 @@ BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSi
 
 vector<double> BackPropagateNetworkLayer::Evaluate(vector<double> val)
 {
+    if (val.size() != InputSize)
+    {
+        throw invalid_argument("vector val has wrong size");
+    }
     vector<double> output = vector<double>();
 
     for (int i = 0; i < OutputSize; i++)
@@ -56,7 +60,9 @@ vector<double> BackPropagateNetworkLayer::Evaluate(vector<double> val)
 
         for (int j = 0; j < InputSize; j++)
         {
-            accumulator += val[j] * Weights[j][i];
+            double t = val[j];
+            double u = Weights[i][j];
+            accumulator += t * u;
         }
 
         output.push_back(accumulator);
@@ -67,7 +73,14 @@ vector<double> BackPropagateNetworkLayer::Evaluate(vector<double> val)
 
 vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin)
 {
-    //Todo: size check
+    if (Iout.size() != InputSize)
+    {
+        throw invalid_argument("vector Iout has wrong size");
+    }
+    if (Oin.size() != OutputSize)
+    {
+        throw invalid_argument("vector Oin has wrong size");
+    }
     vector<double> dEdOout = errorSignal;
     vector<double> dOoutdOin = ActivationDerivative(Oin);
     vector<double> dOindW = Iout;

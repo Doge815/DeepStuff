@@ -19,10 +19,7 @@ public:
 
 Approximation::Approximation()
 {
-	std::vector<int> size = vector<int>();
-	size.push_back(3);
-	size.push_back(5);
-	size.push_back(1);
+	std::vector<int> size = {3, 5, 1};
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape);
@@ -41,9 +38,8 @@ Approximation::Approximation()
 
 		std::cout << "value: " + std::to_string(inputSum) + " output: " + std::to_string(output) + " deviation " + std::to_string(deviation) << std::endl;
 
-		vector<double> expected = vector<double>();
-		expected.push_back(inputSum);
-		network.Learn(outputVector, expected);
+		vector<double> expected = { inputSum };
+		network.Learn(input, expected);
 	}
 }
 
