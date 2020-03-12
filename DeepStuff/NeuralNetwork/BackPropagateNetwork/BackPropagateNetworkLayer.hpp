@@ -1,6 +1,6 @@
 #pragma once
 
-#define step 0.01
+#define step 0.000001
 
 #include <vector>
 #include <stdexcept>
@@ -41,7 +41,7 @@ BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSi
         Weights.push_back(vector<double>());
         for (size_t j = 0; j < inputSize; j++)
         {
-            Weights[i].push_back((((double)rand()) / RAND_MAX) * 2 - 1);
+            Weights[i].push_back((((double)rand()) / RAND_MAX));
         }
     }
 }
@@ -90,7 +90,7 @@ vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vect
         for (size_t j = 0; j < OutputSize; j++)
         {
             double errorGradient = dEdOout[j] * dOoutdOin[j] * dOindW[i];
-            Weights[j][i] -= step * errorGradient;
+            Weights[j][i] += step * errorGradient;
         }
     }
 
