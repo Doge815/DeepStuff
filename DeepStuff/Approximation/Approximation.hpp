@@ -41,10 +41,3 @@ Approximation::Approximation()
 		network.Learn(input, expected);
 	}
 }
-
-std::string to_string(double dbl)
-{
-	std::ostringstream strs;
-	strs << dbl;
-	return strs.str();
-}
