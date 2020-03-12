@@ -2,6 +2,6 @@
 
 int main()
 {
-    Approximation a = Approximation();
+    Approximation::Approximator();
     return 0;
 }

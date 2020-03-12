@@ -13,11 +13,11 @@ class Approximation
 {
 private:
 public:
-	Approximation();
+	static void Approximator();
 
 };
 
-Approximation::Approximation()
+void Approximation::Approximator()
 {
 	std::vector<int> size = {3, 5, 1};
 	NetworkShape shape = NetworkShape(size);
