@@ -6,11 +6,9 @@
 #include <stdexcept>
 #include <math.h>
 
-#include "../Activation.hpp"
-
 using namespace std;
 
-//enum LayerType {Hidden, Input, Output};
+enum LayerType {Hidden, Input, Output};
 
 class BackPropagateNetworkLayer
 {
@@ -23,19 +21,19 @@ class BackPropagateNetworkLayer
         int InputSize;
         int OutputSize;
 
-        BackPropagateNetworkLayer(int inputSize, int outputSize, ActivationFunction function);
+        BackPropagateNetworkLayer(int inputSize, int outputSize);
         vector<double> Evaluate(vector<double> val);
         vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin);
-        ActivationFunction Activator;
 
-        
+        vector<double> Activate(vector<double> value);
+        vector<double> ActivationDerivative(vector<double> value);
+        vector<double> ActivationInverse(vector<double> value);
 };
 
-BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSize, ActivationFunction function)
+BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSize)
 {
     InputSize = inputSize;
     OutputSize = outputSize;
-    Activator = function;
 
     Weights = vector<vector<double>>();
     for (size_t i = 0; i < outputSize; i++)
@@ -70,7 +68,7 @@ vector<double> BackPropagateNetworkLayer::Evaluate(vector<double> val)
         output.push_back(accumulator);
     }
 
-    return Activator.Activate(output);
+    return Activate(output);
 }
 
 vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin)
@@ -84,7 +82,7 @@ vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vect
         throw invalid_argument("vector Oin has wrong size");
     }
     vector<double> dEdOout = errorSignal;
-    vector<double> dOoutdOin = Activator.ActivationDerivative(Oin);
+    vector<double> dOoutdOin = ActivationDerivative(Oin);
     vector<double> dOindW = Iout;
 
     for (size_t i = 0; i < InputSize; i++)
@@ -110,4 +108,34 @@ vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vect
     }
     
     return dEdIout;
+}
+
+vector<double> BackPropagateNetworkLayer::Activate(vector<double> value)
+{
+    vector<double> output = vector<double>();
+    for(int i = 0; i < value.size(); i++)
+    {
+        output.push_back(value[i] > 0 ? value[i] : 0);
+    }
+    return output;
+}
+
+vector<double> BackPropagateNetworkLayer::ActivationDerivative(vector<double> value)
+{
+    vector<double> output = vector<double>();
+    for(int i = 0; i < value.size(); i++)
+    {
+        output.push_back(value[i] > 0 ? 1 : 0);
+    }
+    return output;
+}
+
+vector<double> BackPropagateNetworkLayer::ActivationInverse(vector<double> value)
+{
+    vector<double> output = vector<double>();
+    for(int i = 0; i < value.size(); i++)
+    {
+        output.push_back(value[i]);
+    }
+    return output;
 }

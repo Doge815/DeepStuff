@@ -1,4 +1,3 @@
-#include "../NeuralNetwork/LayerShape.hpp"
 #include "../NeuralNetwork/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
@@ -19,9 +18,7 @@ public:
 
 void Approximation::Approximator()
 {
-	std::vector<LayerShape> size = {LayerShape((ActivationFunction)ReLu(), 3),
-									LayerShape((ActivationFunction)ReLu(), 5),
-									LayerShape((ActivationFunction)ReLu(), 1)};
+	std::vector<int> size = {3, 5, 1};
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape);

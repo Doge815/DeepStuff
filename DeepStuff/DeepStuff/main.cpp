@@ -3,7 +3,7 @@
 
 int main()
 {
-    Approximation::Approximator();
-    //Mnist::Mnister();
+    //Approximation::Approximator();
+    Mnist::Mnister();
     return 0;
 }

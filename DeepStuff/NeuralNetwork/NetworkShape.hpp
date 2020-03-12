@@ -3,30 +3,28 @@
 #include "vector"
 #include <stdexcept>
 
-#include "LayerShape.hpp"
-
 using namespace std;
 
 class NetworkShape
 {
     private:
-        vector<LayerShape> layerShapes;
+        vector<int> Size;
 
     public:
-        NetworkShape(vector<LayerShape> shapes);
-        vector<LayerShape> GetShapes();
+        NetworkShape(vector<int> s);
+        vector<int> GetSize();
 };
 
-NetworkShape::NetworkShape(vector<LayerShape> shapes)
+NetworkShape::NetworkShape(vector<int> s)
 {
-    if(shapes.size() < 2) 
+    if(s.size() < 2) 
     {
-        throw std::invalid_argument("s needs at least 2 layers");
+        throw std::invalid_argument("s needs at least 2 values");
     }
-    layerShapes = shapes;
+    Size = s;
 }
 
-vector<LayerShape> NetworkShape::GetShapes()
+vector<int> NetworkShape::GetSize()
 {
-    return layerShapes;
+    return Size;
 }
