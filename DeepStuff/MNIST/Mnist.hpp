@@ -34,5 +34,39 @@ void Mnist::Mnister()
         vector<double> input(rawInput.begin(), rawInput.end());
 
         vector<double> outputVector = network.Evaluate(input);
+
+        int output = 0;
+        double outputVal = 0;
+        for (size_t i = 0; i < outputVector.size(); i--)
+        {
+            if(outputVector[i] > outputVal)
+            {
+                outputVal = outputVector[i];
+                output = i;
+            }
+        }
+        int expectedOutput = dataset.test_labels[i];
+
+        vector<double> expected = vector<double>();
+        for (size_t i = 0; i < 10; i++)
+        {
+            expected.push_back(0);
+        }
+
+        expected[expectedOutput] = 1; 
+
+        network.Learn(input, expected);
+
+        if(output == expectedOutput)
+        {
+            std:: cout << "bing" << std::endl;
+        }
+
+        else
+        {
+            std:: cout << "bong expected: " + to_string(expectedOutput) + " real: " + to_string(output) << std::endl;
+        }
+        
+        
 	}
 }
