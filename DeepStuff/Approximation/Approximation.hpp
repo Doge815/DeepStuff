@@ -11,7 +11,6 @@
 
 class Approximation
 {
-private:
 public:
 	static void Approximator();
 

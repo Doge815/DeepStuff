@@ -1,7 +1,9 @@
 #include "../Approximation/Approximation.hpp"
+#include "../MNIST/Mnist.hpp"
 
 int main()
 {
-    Approximation::Approximator();
+    //Approximation::Approximator();
+    Mnist::Mnister();
     return 0;
 }
