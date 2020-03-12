@@ -57,9 +57,9 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
     vector<double> errorSignal = vector<double>();
     double error = 0;
 
-    for (size_t i = 0; i < input.size(); i++)
+    for (size_t i = 0; i < Iout[Layers.size()].size(); i++)
     {
-        double absoluteError = expected[i] - input[i];
+        double absoluteError = expected[i] - Iout[Layers.size()][i];
         error += absoluteError * absoluteError;
         errorSignal.push_back(absoluteError);
     }
