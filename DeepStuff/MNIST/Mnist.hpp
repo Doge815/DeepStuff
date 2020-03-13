@@ -1,7 +1,9 @@
 #pragma once
-#define Size 28 * 20
+#define ImageSize 28
+#define SizeMultiplier 20
+#define Size ImageSize * SizeMultiplier
 
-#include "SFML/Graphics.hpp""
+#include "SFML/Graphics.hpp"
 
 #include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
@@ -12,6 +14,8 @@
 #include <string>
 #include <iostream>
 
+void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
+
 class Mnist
 {
     public:
@@ -20,7 +24,7 @@ class Mnist
 
 void Mnist::Mnister()
 {
-    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "FlappyDeep2", sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist detector", sf::Style::Titlebar | sf::Style::Close);
 
     mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>();
 
@@ -35,7 +39,7 @@ void Mnist::Mnister()
 	
     for(int i = 0; i < dataset.training_images.size(); i++)
 	{
-        vector<uint8_t> rawInput = dataset.test_images[i];
+        vector<uint8_t> rawInput = dataset.training_images[i];
         vector<double> input(rawInput.begin(), rawInput.end());
 
         vector<double> outputVector = network.Evaluate(input);
@@ -62,7 +66,7 @@ void Mnist::Mnister()
 
         double error = network.Learn(input, expected);
 
-        if (i % 100 == 0 || true)
+        if (i % 100 == 0)
         {
             std::cout << "\033[2J\033[1;1H";
             std::cout << "image number: " + to_string(i) << std::endl << std::endl;
@@ -74,10 +78,33 @@ void Mnist::Mnister()
             {
                 std::cout << "number: " + to_string(u) + "; probability: " + to_string(outputVector[u]) << std::endl;
             }
-
-            getchar();
+            RenderImage(window, rawInput);
+            //getchar();
         }
         
         
 	}
+}
+
+void RenderImage(sf::RenderWindow* window, vector<uint8_t> image)
+{
+    sf::VertexArray pointmap(sf::Points, image.size() * SizeMultiplier * SizeMultiplier);
+    for (int i = 0; i < image.size(); i++)
+    {
+        int x = i % ImageSize;
+        int y = (i - x) / ImageSize;
+        sf::Color color = sf::Color(image[i], image[i], image[i]);
+        for (int u = 0; u < SizeMultiplier; u++)
+        {
+            for (int o = 0; o < SizeMultiplier; o++)
+            {
+                pointmap[i * SizeMultiplier * SizeMultiplier + u * SizeMultiplier + o].position = sf::Vector2f(x * SizeMultiplier + u, y * SizeMultiplier + o);
+                pointmap[i * SizeMultiplier * SizeMultiplier + u * SizeMultiplier + o].color = color;
+            }
+        }
+        
+    }
+    window->clear(sf::Color::Black);
+    window->draw(pointmap);
+    window->display();
 }
