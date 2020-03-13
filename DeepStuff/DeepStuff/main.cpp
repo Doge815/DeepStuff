@@ -3,7 +3,10 @@
 
 int main()
 {
-    //Approximation::Approximator();
+    #if false
+    Approximation::Approximator();
+    #else
     Mnist::Mnister();
+    #endif
     return 0;
 }

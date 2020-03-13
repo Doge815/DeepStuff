@@ -1,6 +1,9 @@
 #pragma once
+#define Size 28 * 20
 
-#include "../NeuralNetwork/NetworkShape.hpp"
+#include "SFML/Graphics.hpp""
+
+#include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
 #include "Reader/mnist_reader.hpp"
@@ -17,6 +20,8 @@ class Mnist
 
 void Mnist::Mnister()
 {
+    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "FlappyDeep2", sf::Style::Titlebar | sf::Style::Close);
+
     mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>();
 
     std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 784),
@@ -37,18 +42,18 @@ void Mnist::Mnister()
 
         int output = -1;
         double outputVal = -1;
-        for (size_t i = 0; i < outputVector.size(); i++)
+        for (int u = 0; u < outputVector.size(); u++)
         {
-            if(outputVector[i] > outputVal)
+            if(outputVector[u] > outputVal)
             {
-                outputVal = outputVector[i];
-                output = i;
+                outputVal = outputVector[u];
+                output = u;
             }
         }
         int expectedOutput = dataset.training_labels[i];
 
         vector<double> expected = vector<double>();
-        for (size_t i = 0; i < 10; i++)
+        for (int u = 0; u < outputVector.size(); u++)
         {
             expected.push_back(0);
         }
@@ -57,10 +62,21 @@ void Mnist::Mnister()
 
         double error = network.Learn(input, expected);
 
-        if(i % 100 == 0)
-            std::cout <<"[" +to_string(i) +"] " + ((output==expectedOutput)?("right! error: "):("wrong! error: ")) + to_string(error) << std::endl;
+        if (i % 100 == 0 || true)
+        {
+            std::cout << "\033[2J\033[1;1H";
+            std::cout << "image number: " + to_string(i) << std::endl << std::endl;
+            std::cout << "expected: " + to_string(expectedOutput) << std::endl;
+            std::cout << "detected: " + to_string(output) << std::endl;
+            std::cout << "error: " + to_string(error) << std::endl << std::endl;
 
-        //getchar();
+            for (int u = 0; u < outputVector.size(); u++)
+            {
+                std::cout << "number: " + to_string(u) + "; probability: " + to_string(outputVector[u]) << std::endl;
+            }
+
+            getchar();
+        }
         
         
 	}

@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Approximation">
       <UniqueIdentifier>{8521980b-ba60-4ad1-ba92-069a7c38e78a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mnist">
+      <UniqueIdentifier>{7e596110-1c94-4fba-98c4-4e0933d488b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Mnist\Reader">
+      <UniqueIdentifier>{8ce15ba9-ca34-4861-9c6d-60930dfc7dc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -32,12 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\NeuralNetwork\NetworkShape.hpp">
-      <Filter>Header Files\NeuralNetwork\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NeuralNetwork\NeuralNetworkCollection.hpp">
-      <Filter>Header Files\NeuralNetwork\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkLayer.hpp">
       <Filter>Header Files\NeuralNetwork\BackPropagate</Filter>
     </ClInclude>
@@ -47,11 +47,32 @@
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetwork.hpp">
       <Filter>Header Files\NeuralNetwork\BackPropagate</Filter>
     </ClInclude>
-    <ClInclude Include="..\NeuralNetwork\Network.hpp">
-      <Filter>Header Files\NeuralNetwork\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\Approximation\Approximation.hpp">
       <Filter>Header Files\Approximation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Base\Activation.hpp">
+      <Filter>Header Files\NeuralNetwork\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Base\LayerShape.hpp">
+      <Filter>Header Files\NeuralNetwork\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Base\Network.hpp">
+      <Filter>Header Files\NeuralNetwork\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Base\NetworkShape.hpp">
+      <Filter>Header Files\NeuralNetwork\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Base\NeuralNetworkCollection.hpp">
+      <Filter>Header Files\NeuralNetwork\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mnist\Mnist.hpp">
+      <Filter>Header Files\Mnist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mnist\Reader\mnist_reader.hpp">
+      <Filter>Header Files\Mnist\Reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Mnist\Reader\mnist_reader_common.hpp">
+      <Filter>Header Files\Mnist\Reader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

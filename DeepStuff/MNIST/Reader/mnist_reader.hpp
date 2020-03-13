@@ -97,8 +97,8 @@ bool read_mnist_image_file_flat(Container& images, const std::string& path, std:
         // Ignore "start" first elements
         image_buffer += start * (rows * columns);
 
-        for (size_t i = 0; i < count; ++i) {
-            for (size_t j = 0; j < rows * columns; ++j) {
+        for (int i = 0; i < count; ++i) {
+            for (int j = 0; j < rows * columns; ++j) {
                 images(i)[j] = *image_buffer++;
             }
         }
@@ -136,10 +136,10 @@ void read_mnist_image_file(Container<Image>& images, const std::string& path, st
 
         images.reserve(count);
 
-        for (size_t i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) {
             images.push_back(func());
 
-            for (size_t j = 0; j < rows * columns; ++j) {
+            for (int j = 0; j < rows * columns; ++j) {
                 auto pixel   = *image_buffer++;
                 images[i][j] = static_cast<typename Image::value_type>(pixel);
             }
@@ -171,7 +171,7 @@ void read_mnist_label_file(Container<Label>& labels, const std::string& path, st
 
         labels.resize(count);
 
-        for (size_t i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) {
             auto label = *label_buffer++;
             labels[i]  = static_cast<Label>(label);
         }
@@ -200,7 +200,7 @@ bool read_mnist_label_file_flat(Container& labels, const std::string& path, std:
             count = static_cast<unsigned int>(limit);
         }
 
-        for (size_t i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) {
             labels(i)  = *label_buffer++;
         }
 
@@ -236,7 +236,7 @@ bool read_mnist_label_file_categorical(Container& labels, const std::string& pat
         // Ignore "start" first elements
         label_buffer += start;
 
-        for (size_t i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) {
             labels(i)(static_cast<size_t>(*label_buffer++)) = 1;
         }
 

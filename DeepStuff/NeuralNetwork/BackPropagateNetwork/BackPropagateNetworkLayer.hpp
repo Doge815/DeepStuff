@@ -1,8 +1,8 @@
 #pragma once
 
-#define step 0.00000001
+#define step 0.01
 
-#include "../Activation.hpp"
+#include "../Base/Activation.hpp"
 
 #include <vector>
 #include <stdexcept>
@@ -37,10 +37,10 @@ BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSi
     Function = func;
 
     Weights = vector<vector<double>>();
-    for (size_t i = 0; i < outputSize; i++)
+    for (int i = 0; i < outputSize; i++)
     {
         Weights.push_back(vector<double>());
-        for (size_t j = 0; j < inputSize; j++)
+        for (int j = 0; j < inputSize; j++)
         {
             Weights[i].push_back((((double)rand()) / RAND_MAX));
         }
@@ -86,9 +86,9 @@ vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vect
     vector<double> dOoutdOin = Function->ActivationDerivative(Oin);
     vector<double> dOindW = Iout;
 
-    for (size_t i = 0; i < InputSize; i++)
+    for (int i = 0; i < InputSize; i++)
     {
-        for (size_t j = 0; j < OutputSize; j++)
+        for (int j = 0; j < OutputSize; j++)
         {
             double errorGradient = dEdOout[j] * dOoutdOin[j] * dOindW[i];
             Weights[j][i] += step * errorGradient;
@@ -96,11 +96,11 @@ vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vect
     }
 
     vector<double> dEdIout = vector<double>();
-    for (size_t i = 0; i < InputSize; i++)
+    for (int i = 0; i < InputSize; i++)
     {
         double accumulator = 0;
 
-        for (size_t j = 0; j < OutputSize; j++)
+        for (int j = 0; j < OutputSize; j++)
         {
             accumulator += dEdOout[j] * dOoutdOin[j] * Weights[j][i];
         }

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../NeuralNetwork/LayerShape.hpp"
-#include "../NeuralNetwork/NetworkShape.hpp"
+#include "../NeuralNetwork/Base/LayerShape.hpp"
+#include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
 

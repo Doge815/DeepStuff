@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../NeuralNetworkCollection.hpp"
-#include "../NetworkShape.hpp"
+#include "../Base/NeuralNetworkCollection.hpp"
+#include "../Base/NetworkShape.hpp"
 #include "BackPropagateNetwork.hpp"
 
 #include<vector>

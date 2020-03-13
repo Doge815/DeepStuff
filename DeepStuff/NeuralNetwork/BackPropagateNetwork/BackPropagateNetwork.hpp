@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Activation.hpp"
-#include "../Network.hpp"
-#include "../NetworkShape.hpp"
+#include "../Base/Activation.hpp"
+#include "../Base/Network.hpp"
+#include "../Base/NetworkShape.hpp"
 #include "BackPropagateNetworkLayer.hpp"
 
 #include <vector>
@@ -28,7 +28,7 @@ BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape)
 {
     Layers = vector<BackPropagateNetworkLayer>();
     
-    for (size_t i = 0; i < shape.GetShapes().size() - 1; i++)
+    for (int i = 0; i < shape.GetShapes().size() - 1; i++)
     {
         Layers.push_back(BackPropagateNetworkLayer(shape.GetShapes()[i].Size, shape.GetShapes()[i+1].Size, shape.GetShapes()[i+1].Function));
     }
@@ -38,7 +38,7 @@ vector<double> BackPropagateNetwork::Evaluate(vector<double> input)
 {
     vector<double> current = input;
 
-    for (size_t i = 0; i < Layers.size(); i++)
+    for (int i = 0; i < Layers.size(); i++)
     {
         current = Layers[i].Evaluate(current);
     }
@@ -50,7 +50,7 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
 {
     vector<vector<double>> Iout = vector<vector<double>>();
     Iout.push_back(input);
-    for (size_t i = 0; i < Layers.size() ; i++)
+    for (int i = 0; i < Layers.size() ; i++)
     {
         Iout.push_back(Layers[i].Evaluate(Iout[i]));
     }
@@ -58,7 +58,7 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
     vector<double> errorSignal = vector<double>();
     double error = 0;
 
-    for (size_t i = 0; i < Iout[Layers.size()].size(); i++)
+    for (int i = 0; i < Iout[Layers.size()].size(); i++)
     {
         double absoluteError = expected[i] - Iout[Layers.size()][i];
         error += absoluteError * absoluteError;
