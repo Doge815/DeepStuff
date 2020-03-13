@@ -1,6 +1,6 @@
 #pragma once
 
-#define step 0.0001
+#define step 0.1
 
 #include "../Activation.hpp"
 

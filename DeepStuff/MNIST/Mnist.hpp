@@ -55,20 +55,7 @@ void Mnist::Mnister()
 
         network.Learn(input, expected);
 
-        if(output == expectedOutput)
-        {
-            std:: cout << "bing" << std::endl;
-        }
-
-        else
-        {
-            std:: cout << "bong expected: " + to_string(expectedOutput) + " real: " + to_string(output) << std::endl;
-            /*for (size_t i = 0; i < outputVector.size(); i++)
-            {
-                std::cout << "number: " + to_string(i) + ", chance: " + to_string(outputVector[i]) <<std::endl;
-            }*/
-            
-        }
+        std::cout << ((output==expectedOutput)?("right out: "):("wrong out: ")) + to_string(outputVal) << std::endl;
 
         //getchar();
         

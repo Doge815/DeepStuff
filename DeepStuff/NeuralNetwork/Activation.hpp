@@ -75,7 +75,8 @@ vector<double> Sigmoid::ActivationDerivative(vector<double> value)
     vector<double> output = vector<double>();
     for(int i = 0; i < value.size(); i++)
     {
-        output.push_back( (1 / (1 + std::exp(-value[i]))) * (1 - (1 / (1 + std::exp(-value[i])))) );
+        double y = (1 / (1 + std::exp(-value[i])));
+        output.push_back( y * (1 - y) );
     }
     return output;
 }
@@ -85,7 +86,7 @@ vector<double> Sigmoid::ActivationInverse(vector<double> value)
     vector<double> output = vector<double>();
     for(int i = 0; i < value.size(); i++)
     {
-        output.push_back(- std::log(1 / value[i] - 1));
+        output.push_back( std::log (value[i] / (1 - value[i]) ) );
     }
     return output;
 }
