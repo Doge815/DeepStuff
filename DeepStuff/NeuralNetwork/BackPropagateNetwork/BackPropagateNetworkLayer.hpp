@@ -1,6 +1,6 @@
 #pragma once
 
-#define step 0.01
+#define step 0.0001
 
 #include "../Base/Activation.hpp"
 
@@ -42,7 +42,7 @@ BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSi
         Weights.push_back(vector<double>());
         for (int j = 0; j < inputSize; j++)
         {
-            Weights[i].push_back((((double)rand()) / RAND_MAX));
+            Weights[i].push_back(((((double)rand()) / RAND_MAX) *2 -1)/1000 );
         }
     }
 }
