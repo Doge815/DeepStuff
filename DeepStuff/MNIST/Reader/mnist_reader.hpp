@@ -1,3 +1,5 @@
+#pragma once
+
 //=======================================================================
 // Copyright (c) 2014-2016 Baptiste Wicht
 // Distributed under the terms of the MIT License.

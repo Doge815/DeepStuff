@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../NeuralNetwork/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
@@ -43,7 +45,7 @@ void Mnist::Mnister()
                 output = i;
             }
         }
-        int expectedOutput = dataset.test_labels[i];
+        int expectedOutput = dataset.training_labels[i];
 
         vector<double> expected = vector<double>();
         for (size_t i = 0; i < 10; i++)
@@ -53,9 +55,10 @@ void Mnist::Mnister()
 
         expected[expectedOutput] = 1; 
 
-        network.Learn(input, expected);
+        double error = network.Learn(input, expected);
 
-        std::cout << ((output==expectedOutput)?("right out: "):("wrong out: ")) + to_string(outputVal) << std::endl;
+        if(i % 100 == 0)
+            std::cout <<"[" +to_string(i) +"] " + ((output==expectedOutput)?("right! error: "):("wrong! error: ")) + to_string(error) << std::endl;
 
         //getchar();
         
