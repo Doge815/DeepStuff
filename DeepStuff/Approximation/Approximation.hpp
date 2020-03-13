@@ -1,3 +1,6 @@
+#pragma once
+
+#include "../NeuralNetwork/LayerShape.hpp"
 #include "../NeuralNetwork/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
@@ -18,11 +21,14 @@ public:
 
 void Approximation::Approximator()
 {
-	std::vector<int> size = {3, 5, 1};
+	std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 3),
+										LayerShape((Activation*)(new ReLU()), 5), 
+										LayerShape((Activation*)(new ReLU()), 1)};
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape);
 	BackPropagateNetwork network = dynamic_cast<BackPropagateNetwork&>(*collection.GetNetworks()[0]);
+	
 	while (true)
 	{
 		vector<double> input = vector<double>();

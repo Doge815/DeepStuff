@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Activation.hpp"
 #include "../Network.hpp"
 #include "../NetworkShape.hpp"
 #include "BackPropagateNetworkLayer.hpp"
@@ -27,9 +28,9 @@ BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape)
 {
     Layers = vector<BackPropagateNetworkLayer>();
     
-    for (size_t i = 0; i < shape.GetSize().size() - 1; i++)
+    for (size_t i = 0; i < shape.GetShapes().size() - 1; i++)
     {
-        Layers.push_back(BackPropagateNetworkLayer(shape.GetSize()[i], shape.GetSize()[i+1]));
+        Layers.push_back(BackPropagateNetworkLayer(shape.GetShapes()[i].Size, shape.GetShapes()[i+1].Size, shape.GetShapes()[i+1].Function));
     }
 }
 
@@ -69,7 +70,7 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
 
     for (int u = Layers.size() - 1; u >= 0; u--)
     {
-        vector<double> b = Layers[u].ActivationInverse(Iout[u+1]);
+        vector<double> b = Layers[u].Function->ActivationInverse(Iout[u+1]);
         errorSignal = Layers[u].Train(errorSignal, Iout[u], b);
     }
 

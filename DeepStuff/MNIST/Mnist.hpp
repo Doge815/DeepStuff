@@ -17,12 +17,10 @@ void Mnist::Mnister()
 {
     mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>();
 
-    std::cout << "Nbr of training images = " << dataset.training_images.size() << std::endl;
-    std::cout << "Nbr of training labels = " << dataset.training_labels.size() << std::endl;
-    std::cout << "Nbr of test images = " << dataset.test_images.size() << std::endl;
-    std::cout << "Nbr of test labels = " << dataset.test_labels.size() << std::endl;
+    std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 784),
+										LayerShape((Activation*)(new ReLU()), 800), 
+										LayerShape((Activation*)(new Sigmoid()), 10)};
 
-    std::vector<int> size = {784, 800, 10};
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape);
@@ -35,9 +33,9 @@ void Mnist::Mnister()
 
         vector<double> outputVector = network.Evaluate(input);
 
-        int output = 0;
-        double outputVal = 0;
-        for (size_t i = 0; i < outputVector.size(); i--)
+        int output = -1;
+        double outputVal = -1;
+        for (size_t i = 0; i < outputVector.size(); i++)
         {
             if(outputVector[i] > outputVal)
             {
@@ -65,7 +63,14 @@ void Mnist::Mnister()
         else
         {
             std:: cout << "bong expected: " + to_string(expectedOutput) + " real: " + to_string(output) << std::endl;
+            /*for (size_t i = 0; i < outputVector.size(); i++)
+            {
+                std::cout << "number: " + to_string(i) + ", chance: " + to_string(outputVector[i]) <<std::endl;
+            }*/
+            
         }
+
+        //getchar();
         
         
 	}

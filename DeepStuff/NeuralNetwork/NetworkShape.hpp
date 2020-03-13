@@ -1,30 +1,31 @@
 #pragma once
 
-#include "vector"
+#include <vector>
 #include <stdexcept>
+#include "LayerShape.hpp"
 
 using namespace std;
 
 class NetworkShape
 {
     private:
-        vector<int> Size;
+        vector<LayerShape> layer;
 
     public:
-        NetworkShape(vector<int> s);
-        vector<int> GetSize();
+        NetworkShape(vector<LayerShape> s);
+        vector<LayerShape> GetShapes();
 };
 
-NetworkShape::NetworkShape(vector<int> s)
+NetworkShape::NetworkShape(vector<LayerShape> s)
 {
     if(s.size() < 2) 
     {
         throw std::invalid_argument("s needs at least 2 values");
     }
-    Size = s;
+    layer = s;
 }
 
-vector<int> NetworkShape::GetSize()
+vector<LayerShape> NetworkShape::GetShapes()
 {
-    return Size;
+    return layer;
 }
