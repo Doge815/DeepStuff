@@ -30,9 +30,9 @@ void Mnist::Mnister()
 
     mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>();
 
-    std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 784),
-										LayerShape((Activation*)(new ReLU()), 800), 
-										LayerShape((Activation*)(new Sigmoid()), 10)};
+    std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 784, 0.001),
+										LayerShape((Activation*)(new ReLU()), 800, 0.001),
+										LayerShape((Activation*)(new Sigmoid()), 10, 0.001)};
 
 	NetworkShape shape = NetworkShape(size);
 

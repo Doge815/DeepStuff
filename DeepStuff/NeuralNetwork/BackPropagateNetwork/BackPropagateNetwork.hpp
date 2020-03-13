@@ -30,7 +30,7 @@ BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape)
     
     for (int i = 0; i < shape.GetShapes().size() - 1; i++)
     {
-        Layers.push_back(BackPropagateNetworkLayer(shape.GetShapes()[i].Size, shape.GetShapes()[i+1].Size, shape.GetShapes()[i+1].Function));
+        Layers.push_back(BackPropagateNetworkLayer(shape.GetShapes()[i].Size, shape.GetShapes()[i+1].Size, shape.GetShapes()[i+1].Function, shape.GetShapes()[i + 1].Multiplier));
     }
 }
 

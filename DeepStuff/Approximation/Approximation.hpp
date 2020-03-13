@@ -21,9 +21,9 @@ public:
 
 void Approximation::Approximator()
 {
-	std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 3),
-										LayerShape((Activation*)(new ReLU()), 5), 
-										LayerShape((Activation*)(new ReLU()), 1)};
+	std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 3, 1),
+										LayerShape((Activation*)(new ReLU()), 5, 1), 
+										LayerShape((Activation*)(new ReLU()), 1, 1)};
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape);
