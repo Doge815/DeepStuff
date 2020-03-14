@@ -3,11 +3,11 @@
 
 int main()
 {
-    #if false
-    Approximation::Approximator();
-    #else
-    Mnist::NetworkTester();
-    #endif
-    getchar();
-    return 0;
+#if false
+	Approximation::Approximator();
+#else
+	Mnist::NetworkTester();
+#endif
+	getchar();
+	return 0;
 }

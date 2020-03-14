@@ -16,19 +16,18 @@ class Approximation
 {
 public:
 	static void Approximator();
-
 };
 
 void Approximation::Approximator()
 {
-	std::vector<LayerShape> size = {	LayerShape((Activation*)(new ReLU()), 3, 1),
-										LayerShape((Activation*)(new ReLU()), 5, 1), 
-										LayerShape((Activation*)(new ReLU()), 1, 1)};
+	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 3, 1),
+									LayerShape((Activation*)(new ReLU()), 5, 1),
+									LayerShape((Activation*)(new ReLU()), 1, 1) };
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
 	BackPropagateNetwork network = dynamic_cast<BackPropagateNetwork&>(*collection.GetNetworks()[0]);
-	
+
 	while (true)
 	{
 		vector<double> input = vector<double>();
