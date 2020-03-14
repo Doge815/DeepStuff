@@ -2,7 +2,6 @@
 #define ImageSize 28
 #define SizeMultiplier 20
 #define Size ImageSize * SizeMultiplier
-#define Skip 100
 
 #include "SFML/Graphics.hpp"
 
@@ -16,20 +15,23 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <numeric>
+#include <algorithm>
 
-void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
+int Skip = 100;
 
 class Mnist
 {
 public:
 	static mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset;
 
-	static INetwork* CreateAverageReader(bool verbosity = true, sf::RenderWindow* window = NULL);
+	static INetwork* CreateAverageReader(bool verbosity = true);
 	static void NetworkTester();
+	static void ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector);
 	static void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
 };
 
-INetwork* Mnist::CreateAverageReader(bool verbosity, sf::RenderWindow* window)
+INetwork* Mnist::CreateAverageReader(bool verbosity)
 {
 	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 784, 0.001),
 									 LayerShape((Activation*)(new ReLU()), 800, 0.001),
@@ -82,33 +84,14 @@ INetwork* Mnist::CreateAverageReader(bool verbosity, sf::RenderWindow* window)
 		{
 			if (verbosity)
 			{
-				std::cout << "\033[2J\033[1;1H";
-				std::cout << "image number: " + to_string(i) << std::endl << std::endl;
-				std::cout << "expected: " + to_string(expectedOutput) << std::endl;
-				std::cout << "detected: " + to_string(output) << std::endl;
-				std::cout << "error: " + to_string(error) << std::endl;
-				std::cout << "correctly recognized images: " << std::setfill('0') << std::setw(3) << detected;
-				std::cout << "/" + to_string(Skip) << std::endl << std::endl;
-
-				for (int u = 0; u < outputVector.size(); u++)
-				{
-					std::cout << "number: " + to_string(u) + "; probability: " + to_string(outputVector[u]) << std::endl;
-				}
-				if (window != NULL)
-				{
-					RenderImage(window, rawInput);
-				}
+				ConsoleOutput(&i, NULL, NULL, NULL, &detected, &Skip, NULL);
 			}
+
 			if ((detected / (double)Skip) >= 0.95)
 			{
 				if (verbosity)
 				{
 					std::cout << "\033[2J\033[1;1H";
-				}
-				if (window != NULL)
-				{
-					window->clear(sf::Color::Black);
-					window->display();
 				}
 				return network;
 			}
@@ -123,13 +106,77 @@ INetwork* Mnist::CreateAverageReader(bool verbosity, sf::RenderWindow* window)
 
 void Mnist::NetworkTester()
 {
+	INetwork* network = CreateAverageReader(true);
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
-	INetwork* network = CreateAverageReader(true, window);
-	std::cout << "yay";
-	getchar();
+	
+	int detected = 0;
+	int detectedFrom = 0;
+	for (int i = 0; true; i++)
+	{
+		if (i == dataset.test_images.size())
+		{
+			i = 0;
+		}
+		vector<uint8_t> rawInput = dataset.test_images[i];
+		vector<double> input(rawInput.begin(), rawInput.end());
+
+		vector<double> outputVector = network->Evaluate(input);
+
+		int output = -1;
+		double outputVal = -1;
+		for (int u = 0; u < outputVector.size(); u++)
+		{
+			if (outputVector[u] > outputVal)
+			{
+				outputVal = outputVector[u];
+				output = u;
+			}
+		}
+		int expectedOutput = dataset.test_labels[i];
+
+		detectedFrom++;
+		if (output == expectedOutput)
+			detected++;
+		
+		ConsoleOutput(&i, &expectedOutput, &output, NULL, &detected, &detectedFrom, &outputVector);
+		RenderImage(window, rawInput);
+		getchar();
+	}
 }
 
 mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> Mnist::dataset = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>();
+
+void Mnist::ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector)
+{
+	std::cout << "\033[2J\033[1;1H";
+	if(CurrentIteration != NULL)
+		std::cout << "image number: " + to_string(*CurrentIteration) << std::endl;
+	if (expectedOutput!= NULL)
+		std::cout << "expected: " + to_string(*expectedOutput) << std::endl;
+	if (output!= NULL)
+		std::cout << "detected: " + to_string(*output) << std::endl;
+	if(error != NULL)
+		std::cout << "error: " + to_string(*error) << std::endl;
+	if (detected != NULL && detectedFrom != NULL)
+	{
+		std::cout << "correctly recognized images: " << std::setfill('0') << std::setw((int)floor(log10(*detectedFrom)) + 1) << *detected;
+		std::cout << "/" + to_string(*detectedFrom) << std::endl << std::endl;
+	}
+
+	if (outputVector != NULL)
+	{
+		vector<size_t> index(outputVector->size());
+		iota(index.begin(), index.end(), 0);
+		stable_sort(index.begin(), index.end(),
+			[outputVector](size_t i1, size_t i2) {return (*outputVector)[i1] > (*outputVector)[i2]; });
+
+		for (int u = 0; u < outputVector->size(); u++)
+		{
+			std::cout << "number: " + to_string(index[u]) + "    probability: " << std::setfill('0') << std::setw(3) << (int)round((*outputVector)[index[u]] * 100);
+			std::cout << "%" << std::endl;
+		}
+	}
+}
 
 void Mnist::RenderImage(sf::RenderWindow* window, vector<uint8_t> image)
 {
