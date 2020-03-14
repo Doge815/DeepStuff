@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Base/Activation.hpp"
-#include "../Base/Network.hpp"
+#include "../BaseNetwork/Network.hpp"
 #include "../Base/NetworkShape.hpp"
 #include "BackPropagateNetworkLayer.hpp"
 
@@ -10,41 +10,24 @@
 
 using namespace std;
 
-class BackPropagateNetwork : public INetwork
+class BackPropagateNetwork : public Network
 {
-private:
-
-	vector<BackPropagateNetworkLayer> Layers;
-
 public:
 	double Step;
 	BackPropagateNetwork(NetworkShape shape, double step = 0.0001);
 
-	vector<double> Evaluate(vector<double> input) override;
-	double Learn(vector<double> input, vector<double> expected) override;
+	double Learn(vector<double> input, vector<double> expected);
 };
 
 BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape, double step)
 {
 	Step = step;
-	Layers = vector<BackPropagateNetworkLayer>();
+	Layers = vector<Layer>();
 
 	for (int i = 0; i < shape.GetShapes().size() - 1; i++)
 	{
 		Layers.push_back(BackPropagateNetworkLayer(shape.GetShapes()[i].Size, shape.GetShapes()[i + 1].Size, shape.GetShapes()[i + 1].Function, shape.GetShapes()[i + 1].Multiplier));
 	}
-}
-
-vector<double> BackPropagateNetwork::Evaluate(vector<double> input)
-{
-	vector<double> current = input;
-
-	for (int i = 0; i < Layers.size(); i++)
-	{
-		current = Layers[i].Evaluate(current);
-	}
-
-	return current;
 }
 
 double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected)
@@ -71,7 +54,9 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
 	for (int u = Layers.size() - 1; u >= 0; u--)
 	{
 		vector<double> b = Layers[u].Function->ActivationInverse(Iout[u + 1]);
-		errorSignal = Layers[u].Train(errorSignal, Iout[u], b, Step);
+		Layer* ccc = &Layers[u];
+		BackPropagateNetworkLayer bb = *dynamic_cast<BackPropagateNetworkLayer*>(ccc);
+		errorSignal = bb.Train(errorSignal, Iout[u], b, Step);
 	}
 
 	return error;

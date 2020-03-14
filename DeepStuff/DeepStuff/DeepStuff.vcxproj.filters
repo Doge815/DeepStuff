@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Mnist\Reader">
       <UniqueIdentifier>{8ce15ba9-ca34-4861-9c6d-60930dfc7dc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\NeuralNetwork\BaseNetwork">
+      <UniqueIdentifier>{5e8cd9c6-6b1d-43af-bcee-dba52a1634bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,13 +59,7 @@
     <ClInclude Include="..\NeuralNetwork\Base\LayerShape.hpp">
       <Filter>Header Files\NeuralNetwork\Base</Filter>
     </ClInclude>
-    <ClInclude Include="..\NeuralNetwork\Base\Network.hpp">
-      <Filter>Header Files\NeuralNetwork\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\NeuralNetwork\Base\NetworkShape.hpp">
-      <Filter>Header Files\NeuralNetwork\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NeuralNetwork\Base\NeuralNetworkCollection.hpp">
       <Filter>Header Files\NeuralNetwork\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\Mnist\Mnist.hpp">
@@ -73,6 +70,15 @@
     </ClInclude>
     <ClInclude Include="..\Mnist\Reader\mnist_reader_common.hpp">
       <Filter>Header Files\Mnist\Reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\BaseNetwork\Network.hpp">
+      <Filter>Header Files\NeuralNetwork\BaseNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\BaseNetwork\Collection.hpp">
+      <Filter>Header Files\NeuralNetwork\BaseNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\BaseNetwork\Layer.hpp">
+      <Filter>Header Files\NeuralNetwork\BaseNetwork</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
