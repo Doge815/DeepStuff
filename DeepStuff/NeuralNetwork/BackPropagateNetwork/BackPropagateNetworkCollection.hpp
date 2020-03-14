@@ -14,17 +14,17 @@ class BackPropagateNetworkCollection : public NeuralNetworkCollection
     vector<BackPropagateNetwork*> nets;
     int amountOfNetworks;
     public:
-        BackPropagateNetworkCollection(int amount, NetworkShape shape);
+        BackPropagateNetworkCollection(int amount, NetworkShape shape, double Step);
         vector<INetwork*> GetNetworks() override;
         void Evolve();
 };
 
-BackPropagateNetworkCollection::BackPropagateNetworkCollection(int amount, NetworkShape shape)
+BackPropagateNetworkCollection::BackPropagateNetworkCollection(int amount, NetworkShape shape, double Step)
 {
     nets = vector<BackPropagateNetwork*>();
     for(int i = 0; i < amount; i++)
     {
-        nets.push_back(new BackPropagateNetwork(shape));
+        nets.push_back(new BackPropagateNetwork(shape, Step));
     }
 }
 

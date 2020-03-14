@@ -1,7 +1,5 @@
 #pragma once
 
-#define step 0.0001
-
 #include "../Base/Activation.hpp"
 
 #include <vector>
@@ -27,7 +25,7 @@ class BackPropagateNetworkLayer
 
         BackPropagateNetworkLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier);
         vector<double> Evaluate(vector<double> val);
-        vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin);
+        vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step);
 };
 
 BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier)
@@ -72,7 +70,7 @@ vector<double> BackPropagateNetworkLayer::Evaluate(vector<double> val)
     return Function->Activate(output);
 }
 
-vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin)
+vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step)
 {
     if (Iout.size() != InputSize)
     {

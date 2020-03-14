@@ -17,15 +17,16 @@ class BackPropagateNetwork : public INetwork
         vector<BackPropagateNetworkLayer> Layers;
 
     public:
-
-        BackPropagateNetwork(NetworkShape shape);
+        double Step;
+        BackPropagateNetwork(NetworkShape shape, double step = 0.0001);
 
         vector<double> Evaluate(vector<double> input) override;
-        double Learn(vector<double> input, vector<double> expected);
+        double Learn(vector<double> input, vector<double> expected) override;
 };
 
-BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape)
+BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape, double step)
 {
+    Step = step;
     Layers = vector<BackPropagateNetworkLayer>();
     
     for (int i = 0; i < shape.GetShapes().size() - 1; i++)
@@ -71,7 +72,7 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
     for (int u = Layers.size() - 1; u >= 0; u--)
     {
         vector<double> b = Layers[u].Function->ActivationInverse(Iout[u+1]);
-        errorSignal = Layers[u].Train(errorSignal, Iout[u], b);
+        errorSignal = Layers[u].Train(errorSignal, Iout[u], b, Step);
     }
 
     return error;

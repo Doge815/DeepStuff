@@ -6,7 +6,8 @@ int main()
     #if false
     Approximation::Approximator();
     #else
-    Mnist::Mnister();
+    Mnist::NetworkTester();
     #endif
+    getchar();
     return 0;
 }
