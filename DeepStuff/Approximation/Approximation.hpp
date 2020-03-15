@@ -26,7 +26,7 @@ void Approximation::Approximator()
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	BackPropagateNetwork network = *dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
+	BackPropagateNetwork network = dynamic_cast<BackPropagateNetwork&>(*collection.GetNetworks()[0]);
 
 	while (true)
 	{

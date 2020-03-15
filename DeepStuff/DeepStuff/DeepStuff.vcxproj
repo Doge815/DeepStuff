@@ -154,12 +154,11 @@
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetwork.hpp" />
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkCollection.hpp" />
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkLayer.hpp" />
-    <ClInclude Include="..\NeuralNetwork\BaseNetwork\Collection.hpp" />
-    <ClInclude Include="..\NeuralNetwork\BaseNetwork\Layer.hpp" />
-    <ClInclude Include="..\NeuralNetwork\BaseNetwork\Network.hpp" />
     <ClInclude Include="..\NeuralNetwork\Base\Activation.hpp" />
     <ClInclude Include="..\NeuralNetwork\Base\LayerShape.hpp" />
+    <ClInclude Include="..\NeuralNetwork\Base\Network.hpp" />
     <ClInclude Include="..\NeuralNetwork\Base\NetworkShape.hpp" />
+    <ClInclude Include="..\NeuralNetwork\Base\NeuralNetworkCollection.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

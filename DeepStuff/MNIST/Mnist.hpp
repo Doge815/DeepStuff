@@ -5,7 +5,7 @@
 
 #include "SFML/Graphics.hpp"
 
-#include "../NeuralNetwork/BaseNetwork/Network.hpp"
+#include "../NeuralNetwork/Base/Network.hpp"
 #include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
@@ -25,13 +25,13 @@ class Mnist
 public:
 	static mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset;
 
-	static Network CreateAverageReader(bool verbosity = true);
+	static INetwork* CreateAverageReader(bool verbosity = true);
 	static void NetworkTester();
 	static void ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector);
 	static void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
 };
 
-Network Mnist::CreateAverageReader(bool verbosity)
+INetwork* Mnist::CreateAverageReader(bool verbosity)
 {
 	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 784, 0.001),
 									 LayerShape((Activation*)(new ReLU()), 800, 0.001),
@@ -40,7 +40,7 @@ Network Mnist::CreateAverageReader(bool verbosity)
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	BackPropagateNetwork network = *dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
+	INetwork* network = collection.GetNetworks()[0];
 
 	int detected = 0;
 	for (int i = 0; true; i++)
@@ -52,7 +52,7 @@ Network Mnist::CreateAverageReader(bool verbosity)
 		vector<uint8_t> rawInput = dataset.training_images[i];
 		vector<double> input(rawInput.begin(), rawInput.end());
 
-		vector<double> outputVector = network.Evaluate(input);
+		vector<double> outputVector = network->Evaluate(input);
 
 		int output = -1;
 		double outputVal = -1;
@@ -78,7 +78,7 @@ Network Mnist::CreateAverageReader(bool verbosity)
 			detected++;
 		}
 
-		double error = network.Learn(input, expected);
+		double error = network->Learn(input, expected);
 
 		if (i % Skip == 0)
 		{
@@ -97,7 +97,7 @@ Network Mnist::CreateAverageReader(bool verbosity)
 			}
 			if ((detected / (double)Skip) >= 0.85)
 			{
-				network.Step = 0.0000001;
+				network->Step = 0.0000001;
 			}
 			detected = 0;
 		}
@@ -106,7 +106,7 @@ Network Mnist::CreateAverageReader(bool verbosity)
 
 void Mnist::NetworkTester()
 {
-	Network network = CreateAverageReader(true);
+	INetwork* network = CreateAverageReader(true);
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
 	
 	int detected = 0;
@@ -120,7 +120,7 @@ void Mnist::NetworkTester()
 		vector<uint8_t> rawInput = dataset.test_images[i];
 		vector<double> input(rawInput.begin(), rawInput.end());
 
-		vector<double> outputVector = network.Evaluate(input);
+		vector<double> outputVector = network->Evaluate(input);
 
 		int output = -1;
 		double outputVal = -1;
@@ -165,10 +165,10 @@ void Mnist::ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* outpu
 
 	if (outputVector != NULL)
 	{
-		vector<int> index(outputVector->size());
+		vector<size_t> index(outputVector->size());
 		iota(index.begin(), index.end(), 0);
 		stable_sort(index.begin(), index.end(),
-			[outputVector](int i1, int i2) {return (*outputVector)[i1] > (*outputVector)[i2]; });
+			[outputVector](size_t i1, size_t i2) {return (*outputVector)[i1] > (*outputVector)[i2]; });
 
 		for (int u = 0; u < outputVector->size(); u++)
 		{
