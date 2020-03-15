@@ -19,4 +19,5 @@ vector<string> Split(string ToSplit, string Split)
         end;
 
     std::copy(begin, end, std::back_inserter(tokens));
+    return tokens;
 }

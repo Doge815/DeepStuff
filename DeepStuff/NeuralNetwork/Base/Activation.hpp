@@ -14,7 +14,6 @@ public:
 	virtual vector<double> ActivationDerivative(vector<double> value) = 0;
 	virtual vector<double> ActivationInverse(vector<double> value) = 0;
 	virtual string ToString() =0;
-
 };
 
 class ReLU : public Activation

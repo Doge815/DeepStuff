@@ -26,7 +26,7 @@ public:
 	static mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset;
 
 	static Network* CreateAverageReader(bool verbosity = true);
-	static void NetworkTester();
+	static void NetworkTester(Network* network);
 	static void ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector);
 	static void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
 };
@@ -104,9 +104,8 @@ Network* Mnist::CreateAverageReader(bool verbosity)
 	}
 }
 
-void Mnist::NetworkTester()
+void Mnist::NetworkTester(Network* network)
 {
-	Network* network = CreateAverageReader(true);
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
 	
 	int detected = 0;

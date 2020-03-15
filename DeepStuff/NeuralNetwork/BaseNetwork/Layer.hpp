@@ -14,6 +14,7 @@ public:
 	Activation* Function;
 	vector<vector<double>> GetWeights();
 	virtual vector<double> Evaluate(vector<double> val);
+	static Layer Deserialize(vector<vector<double>> weights, int InputSize, int outputSize, Activation* func);
 };
 
 vector<double> Layer::Evaluate(vector<double> val)
@@ -44,4 +45,15 @@ vector<double> Layer::Evaluate(vector<double> val)
 vector<vector<double>> Layer::GetWeights()
 {
 	return Weights;
+}
+
+Layer Layer::Deserialize(vector<vector<double>> weights, int inputSize, int outputSize, Activation* func)
+{
+	Layer l = Layer();
+	l.Weights = weights;
+	l.InputSize = inputSize;
+	l.OutputSize = outputSize;
+	l.Function = func;
+
+	return l;
 }

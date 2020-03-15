@@ -62,6 +62,8 @@ Network Network::Deserialize(string path)
 	Network n = Network();
 	try
 	{
+		n.Layers = vector<Layer*>();
+
 		ifstream file;
 		file.open(path);
 		string buffer;
@@ -76,6 +78,8 @@ Network Network::Deserialize(string path)
 			vector<string> buff = Split(buffer, "|");
 			int OutputSize = stoi(buff[0]);
 			int InputSize = stoi(buff[1]);
+			Activation* func = (buff[2] == "Sigmoid") ? ((Activation*)new Sigmoid()) : ((Activation*)new ReLU());
+
 			for (int i = 0; i < OutputSize; i++)
 			{
 				vector<double> neuron = vector<double>();
@@ -87,6 +91,8 @@ Network Network::Deserialize(string path)
 				}
 				weights.push_back(neuron);
 			}
+
+			n.Layers.push_back(&Layer::Deserialize(weights, InputSize, OutputSize, func));
 		}
 	}
 	catch(const std::exception & e)
