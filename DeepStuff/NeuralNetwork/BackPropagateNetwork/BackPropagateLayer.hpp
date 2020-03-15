@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Base/Activation.hpp"
+
 #include "../BaseNetwork/Layer.hpp"
 
 #include <vector>

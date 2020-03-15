@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../BaseNetwork/NetworkCollection.hpp"
 #include "../Base/NetworkShape.hpp"
+
+#include "../BaseNetwork/NetworkCollection.hpp"
+
 #include "BackPropagateNetwork.hpp"
 
 #include<vector>
-#include<cstdlib>
 
 using namespace std;
 

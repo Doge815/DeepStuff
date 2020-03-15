@@ -2,9 +2,11 @@
 
 #include "../Base/Activation.hpp"
 #include "../BaseNetwork/Layer.hpp"
+
 #include "../BaseNetwork/Network.hpp"
 #include "../Base/NetworkShape.hpp"
-#include "BackPropagateNetworkLayer.hpp"
+
+#include "BackPropagateLayer.hpp"
 
 #include <vector>
 #include <math.h>

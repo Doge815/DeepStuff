@@ -153,7 +153,7 @@
     <ClInclude Include="..\Mnist\Reader\mnist_reader_common.hpp" />
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetwork.hpp" />
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkCollection.hpp" />
-    <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkLayer.hpp" />
+    <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateLayer.hpp" />
     <ClInclude Include="..\NeuralNetwork\BaseNetwork\Layer.hpp" />
     <ClInclude Include="..\NeuralNetwork\BaseNetwork\Network.hpp" />
     <ClInclude Include="..\NeuralNetwork\BaseNetwork\NetworkCollection.hpp" />

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Layer.hpp"
-#include "../BackPropagateNetwork/BackPropagateNetworkLayer.hpp"
+
 #include <vector>
 
 using namespace std;
