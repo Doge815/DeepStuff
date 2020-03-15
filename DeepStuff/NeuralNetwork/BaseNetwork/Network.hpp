@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Layer.hpp"
 #include "../BackPropagateNetwork/BackPropagateNetworkLayer.hpp"
 #include <vector>
 
@@ -8,7 +9,7 @@ using namespace std;
 class Network
 {
 protected:
-	vector<BackPropagateNetworkLayer> Layers;
+	vector<Layer*> Layers;
 public:
 	double Step = 0;
 	virtual vector<double> Evaluate(vector<double> values);
@@ -20,7 +21,7 @@ vector<double> Network::Evaluate(vector<double> input)
 
 	for (int i = 0; i < Layers.size(); i++)
 	{
-		current = Layers[i].Evaluate(current);
+		current = Layers[i]->Evaluate(current);
 	}
 
 	return current;

@@ -12,7 +12,7 @@ public:
 	int InputSize;
 	int OutputSize;
 	Activation* Function;
-	vector<double> Evaluate(vector<double> val);
+	virtual vector<double> Evaluate(vector<double> val);
 };
 
 vector<double> Layer::Evaluate(vector<double> val)
