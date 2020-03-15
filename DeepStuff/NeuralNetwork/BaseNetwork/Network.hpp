@@ -75,7 +75,7 @@ Network Network::Deserialize(string path)
 		{
 			vector<vector<double>> weights = vector<vector<double>>();
 			getline(file, buffer);
-			vector<string> buff = Split(buffer, "|");
+			vector<string> buff = Split(buffer, '|');
 			int OutputSize = stoi(buff[0]);
 			int InputSize = stoi(buff[1]);
 			Activation* func = (buff[2] == "Sigmoid") ? ((Activation*)new Sigmoid()) : ((Activation*)new ReLU());
@@ -84,15 +84,15 @@ Network Network::Deserialize(string path)
 			{
 				vector<double> neuron = vector<double>();
 				getline(file, buffer);
-				vector<string> neuronbuff = Split(buffer, "|");
+				vector<string> neuronbuff = Split(buffer, '|');
 				for (int o = 0; o < InputSize; o++)
 				{
 					neuron.push_back(stod(neuronbuff[o]));
 				}
 				weights.push_back(neuron);
 			}
-
-			n.Layers.push_back(&Layer::Deserialize(weights, InputSize, OutputSize, func));
+			Layer p = Layer::Deserialize(weights, InputSize, OutputSize, func);
+			n.Layers.push_back(&p);
 		}
 	}
 	catch(const std::exception & e)

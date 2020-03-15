@@ -1,23 +1,20 @@
 #pragma once
 
-#include<string>
-#include <algorithm>
-#include <iterator>
-#include <regex>
+#include <string>
 #include <vector>
-#include<string>
+#include <sstream>
+#include <iostream>
 
 using namespace std;
 
-vector<string> Split(string ToSplit, string Split)
+vector<string> Split(string ToSplit, char Split)
 {
-    std::vector<std::string> tokens;
-    std::regex re(Split);
-
-    std::sregex_token_iterator
-        begin(ToSplit.begin(), ToSplit.end(), re),
-        end;
-
-    std::copy(begin, end, std::back_inserter(tokens));
-    return tokens;
+    std::stringstream ss(ToSplit);
+    std::string item;
+    std::vector<std::string> splittedStrings;
+    while (std::getline(ss, item, Split))
+    {
+        splittedStrings.push_back(item);
+    }
+    return splittedStrings;
 }
