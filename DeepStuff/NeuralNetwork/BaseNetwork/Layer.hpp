@@ -11,8 +11,8 @@ protected:
 	int InputSize;
 	int OutputSize;
 public:
-	virtual vector<double> Evaluate(vector<double> val);
-
+	vector<double> Evaluate(vector<double> val);
+	virtual vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step) = 0;
 	Activation* Function = NULL;
 };
 
