@@ -14,7 +14,7 @@ class BackPropagateNetworkLayer : public Layer
 public:
 
 	BackPropagateNetworkLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier);
-	vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step) override;
+	vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step);
 };
 
 BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier)
