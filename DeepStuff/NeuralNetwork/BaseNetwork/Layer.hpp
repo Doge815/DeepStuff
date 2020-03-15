@@ -9,6 +9,8 @@ class Layer
 protected:
 	vector<vector<double>> Weights;
 public:
+	Layer(vector<vector<double>> weights, int inputSize, int outputSize, Activation* func);
+	Layer();
 	int InputSize;
 	int OutputSize;
 	Activation* Function;
@@ -47,13 +49,15 @@ vector<vector<double>> Layer::GetWeights()
 	return Weights;
 }
 
-Layer Layer::Deserialize(vector<vector<double>> weights, int inputSize, int outputSize, Activation* func)
+Layer::Layer(vector<vector<double>> weights, int inputSize, int outputSize, Activation* func)
 {
-	Layer l = Layer();
-	l.Weights = weights;
-	l.InputSize = inputSize;
-	l.OutputSize = outputSize;
-	l.Function = func;
+	Weights = weights;
+	InputSize = inputSize;
+	OutputSize = outputSize;
+	Function = func;
+}
 
-	return l;
+Layer::Layer()
+{
+
 }

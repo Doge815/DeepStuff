@@ -7,19 +7,27 @@
 #include <vector>
 #include<string>
 #include<fstream>
+#include<iostream>
 
 using namespace std;
 
 class Network
 {
+private:
+	Network(vector<Layer> layers);
 protected:
 	vector<Layer*> Layers;
 public:
+	Network();
 	virtual vector<double> Evaluate(vector<double> values);
 
 	static Network Deserialize(string path);
 	void Serialize(string path);
 };
+
+Network::Network()
+{
+}
 
 vector<double> Network::Evaluate(vector<double> input)
 {
@@ -59,10 +67,9 @@ void Network::Serialize(string path)
 
 Network Network::Deserialize(string path)
 {
-	Network n = Network();
 	try
 	{
-		n.Layers = vector<Layer*>();
+		vector<Layer*> Layers = vector<Layer*>();
 
 		ifstream file;
 		file.open(path);
@@ -91,9 +98,16 @@ Network Network::Deserialize(string path)
 				}
 				weights.push_back(neuron);
 			}
-			Layer p = Layer::Deserialize(weights, InputSize, OutputSize, func);
-			n.Layers.push_back(&p);
+			Layer* p = new Layer(weights, InputSize, OutputSize, func);
+			Layers.push_back(p);
 		}
+
+		Network n = Network();
+		for (int i = 0; i < Layers.size(); i++)
+		{
+			n.Layers.push_back(Layers[i]);
+		}
+		return n;
 	}
 	catch(const std::exception & e)
 	{
