@@ -12,6 +12,7 @@ public:
 	int InputSize;
 	int OutputSize;
 	Activation* Function;
+	vector<vector<double>> GetWeights();
 	virtual vector<double> Evaluate(vector<double> val);
 };
 
@@ -38,4 +39,9 @@ vector<double> Layer::Evaluate(vector<double> val)
 	}
 
 	return Function->Activate(output);
+}
+
+vector<vector<double>> Layer::GetWeights()
+{
+	return Weights;
 }

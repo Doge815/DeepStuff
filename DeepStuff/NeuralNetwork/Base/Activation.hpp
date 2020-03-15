@@ -3,6 +3,7 @@
 #include <vector>
 #include <math.h>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -12,6 +13,8 @@ public:
 	virtual vector<double> Activate(vector<double> value) = 0;
 	virtual vector<double> ActivationDerivative(vector<double> value) = 0;
 	virtual vector<double> ActivationInverse(vector<double> value) = 0;
+	virtual string ToString() =0;
+
 };
 
 class ReLU : public Activation
@@ -20,6 +23,7 @@ public:
 	vector<double> Activate(vector<double> value);
 	vector<double> ActivationDerivative(vector<double> value);
 	vector<double> ActivationInverse(vector<double> value);
+	string ToString() { return "ReLU"; }
 };
 
 vector<double> ReLU::Activate(vector<double> value)
@@ -58,6 +62,7 @@ public:
 	vector<double> Activate(vector<double> value);
 	vector<double> ActivationDerivative(vector<double> value);
 	vector<double> ActivationInverse(vector<double> value);
+	string ToString() { return "Sigmoid"; }
 };
 
 vector<double> Sigmoid::Activate(vector<double> value)
