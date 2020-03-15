@@ -12,7 +12,6 @@ protected:
 public:
 	double Step = 0;
 	virtual vector<double> Evaluate(vector<double> values);
-	virtual double Learn(vector<double> input, vector<double> expected) = 0;
 };
 
 vector<double> Network::Evaluate(vector<double> input)

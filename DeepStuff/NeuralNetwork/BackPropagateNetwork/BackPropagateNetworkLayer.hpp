@@ -8,8 +8,6 @@
 
 using namespace std;
 
-enum LayerType { Hidden, Input, Output };
-
 class BackPropagateNetworkLayer
 {
 private:

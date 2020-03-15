@@ -40,7 +40,7 @@ Network* Mnist::CreateAverageReader(bool verbosity)
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	Network* network = collection.GetNetworks()[0];
+	BackPropagateNetwork* network = dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
 
 	int detected = 0;
 	for (int i = 0; true; i++)
@@ -79,6 +79,7 @@ Network* Mnist::CreateAverageReader(bool verbosity)
 		}
 
 		double error = network->Learn(input, expected);
+		return network;
 		if (i % Skip == 0)
 		{
 			if (verbosity)

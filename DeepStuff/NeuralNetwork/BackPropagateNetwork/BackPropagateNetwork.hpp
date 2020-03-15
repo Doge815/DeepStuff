@@ -16,7 +16,7 @@ public:
 	double Step;
 	BackPropagateNetwork(NetworkShape shape, double step = 0.0001);
 
-	double Learn(vector<double> input, vector<double> expected) override;
+	double Learn(vector<double> input, vector<double> expected);
 };
 
 BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape, double step)
