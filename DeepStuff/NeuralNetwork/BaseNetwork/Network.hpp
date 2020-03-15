@@ -2,6 +2,8 @@
 
 #include "Layer.hpp"
 
+#include "../../Extensions/Extensions.hpp"
+
 #include <vector>
 #include<string>
 #include<fstream>
@@ -38,7 +40,7 @@ void Network::Serialize(string path)
 	for (int i = 0; i < Layers.size(); i++)
 	{
 		vector<vector<double>> w = Layers[i]->GetWeights();
-		flat += to_string(Layers[i]->OutputSize) + " " + to_string(Layers[i]->InputSize) + " " + Layers[i]->Function->ToString() + "\n";
+		flat += to_string(Layers[i]->OutputSize) + "|" + to_string(Layers[i]->InputSize) + "|" + Layers[i]->Function->ToString() + "\n";
 		for (int u = 0; u < Layers[i]->OutputSize; u++)
 		{
 			for (int o = 0; o < Layers[i]->InputSize; o++)
@@ -58,8 +60,37 @@ void Network::Serialize(string path)
 Network Network::Deserialize(string path)
 {
 	Network n = Network();
+	try
+	{
+		ifstream file;
+		file.open(path);
+		string buffer;
 
-	ifstream file;
-	file.open(path);
+		getline(file, buffer);
+		int LayerAmount = stoi(buffer);
 
+		for (int i = 0; i < LayerAmount; i++)
+		{
+			vector<vector<double>> weights = vector<vector<double>>();
+			getline(file, buffer);
+			vector<string> buff = Split(buffer, "|");
+			int OutputSize = stoi(buff[0]);
+			int InputSize = stoi(buff[1]);
+			for (int i = 0; i < OutputSize; i++)
+			{
+				vector<double> neuron = vector<double>();
+				getline(file, buffer);
+				vector<string> neuronbuff = Split(buffer, "|");
+				for (int o = 0; o < InputSize; o++)
+				{
+					neuron.push_back(stod(neuronbuff[o]));
+				}
+				weights.push_back(neuron);
+			}
+		}
+	}
+	catch(const std::exception & e)
+	{
+
+	}
 }

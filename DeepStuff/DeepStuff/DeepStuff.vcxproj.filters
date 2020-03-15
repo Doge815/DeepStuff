@@ -80,5 +80,8 @@
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateLayer.hpp">
       <Filter>Header Files\NeuralNetwork\BackPropagate</Filter>
     </ClInclude>
+    <ClInclude Include="..\Extensions\Extensions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

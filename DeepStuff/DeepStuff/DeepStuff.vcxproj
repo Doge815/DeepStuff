@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Approximation\Approximation.hpp" />
+    <ClInclude Include="..\Extensions\Extensions.hpp" />
     <ClInclude Include="..\Mnist\Mnist.hpp" />
     <ClInclude Include="..\Mnist\Reader\mnist_reader.hpp" />
     <ClInclude Include="..\Mnist\Reader\mnist_reader_common.hpp" />
