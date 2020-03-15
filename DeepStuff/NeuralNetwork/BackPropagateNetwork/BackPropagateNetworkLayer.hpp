@@ -13,7 +13,6 @@ class BackPropagateNetworkLayer : public Layer
 {
 public:
 	BackPropagateNetworkLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier);
-	vector<double> Evaluate(vector<double> val);
 	vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step);
 };
 
@@ -32,31 +31,6 @@ BackPropagateNetworkLayer::BackPropagateNetworkLayer(int inputSize, int outputSi
 			Weights[i].push_back(((((double)rand()) / RAND_MAX) * 2 - 1) * WeightBaseMultiplier);
 		}
 	}
-}
-
-vector<double> BackPropagateNetworkLayer::Evaluate(vector<double> val)
-{
-	if (val.size() != InputSize)
-	{
-		throw invalid_argument("vector val has wrong size");
-	}
-	vector<double> output = vector<double>();
-
-	for (int i = 0; i < OutputSize; i++)
-	{
-		double accumulator = 0;
-
-		for (int j = 0; j < InputSize; j++)
-		{
-			double t = val[j];
-			double u = Weights[i][j];
-			accumulator += t * u;
-		}
-
-		output.push_back(accumulator);
-	}
-
-	return Function->Activate(output);
 }
 
 vector<double> BackPropagateNetworkLayer::Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step)
