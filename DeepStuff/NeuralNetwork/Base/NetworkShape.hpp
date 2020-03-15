@@ -1,8 +1,9 @@
 #pragma once
 
+#include "LayerShape.hpp"
+
 #include <vector>
 #include <stdexcept>
-#include "LayerShape.hpp"
 
 using namespace std;
 
