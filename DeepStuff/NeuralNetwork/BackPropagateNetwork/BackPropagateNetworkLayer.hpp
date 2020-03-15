@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Base/Activation.hpp"
+#include "../BaseNetwork/Layer.hpp"
 
 #include <vector>
 #include <stdexcept>
@@ -8,19 +9,9 @@
 
 using namespace std;
 
-class BackPropagateNetworkLayer
+class BackPropagateNetworkLayer : public Layer
 {
-private:
-
-	vector<vector<double>> Weights;
-
 public:
-
-	int InputSize;
-	int OutputSize;
-
-	Activation* Function;
-
 	BackPropagateNetworkLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier);
 	vector<double> Evaluate(vector<double> val);
 	vector<double> Train(vector<double> errorSignal, vector<double> Iout, vector<double> Oin, double step);
