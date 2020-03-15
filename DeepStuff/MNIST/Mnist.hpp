@@ -5,7 +5,7 @@
 
 #include "SFML/Graphics.hpp"
 
-#include "../NeuralNetwork/Base/Network.hpp"
+#include "../NeuralNetwork/BaseNetwork/Network.hpp"
 #include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
@@ -25,13 +25,13 @@ class Mnist
 public:
 	static mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset;
 
-	static INetwork* CreateAverageReader(bool verbosity = true);
+	static Network* CreateAverageReader(bool verbosity = true);
 	static void NetworkTester();
 	static void ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector);
 	static void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
 };
 
-INetwork* Mnist::CreateAverageReader(bool verbosity)
+Network* Mnist::CreateAverageReader(bool verbosity)
 {
 	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 784, 0.001),
 									 LayerShape((Activation*)(new ReLU()), 800, 0.001),
@@ -40,7 +40,7 @@ INetwork* Mnist::CreateAverageReader(bool verbosity)
 	NetworkShape shape = NetworkShape(size);
 
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	INetwork* network = collection.GetNetworks()[0];
+	Network* network = collection.GetNetworks()[0];
 
 	int detected = 0;
 	for (int i = 0; true; i++)
@@ -79,7 +79,6 @@ INetwork* Mnist::CreateAverageReader(bool verbosity)
 		}
 
 		double error = network->Learn(input, expected);
-
 		if (i % Skip == 0)
 		{
 			if (verbosity)
@@ -106,7 +105,7 @@ INetwork* Mnist::CreateAverageReader(bool verbosity)
 
 void Mnist::NetworkTester()
 {
-	INetwork* network = CreateAverageReader(true);
+	Network* network = CreateAverageReader(true);
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
 	
 	int detected = 0;

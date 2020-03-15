@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Base/NeuralNetworkCollection.hpp"
+#include "../BaseNetwork/NetworkCollection.hpp"
 #include "../Base/NetworkShape.hpp"
 #include "BackPropagateNetwork.hpp"
 
@@ -15,7 +15,7 @@ class BackPropagateNetworkCollection : public NeuralNetworkCollection
 	int amountOfNetworks;
 public:
 	BackPropagateNetworkCollection(int amount, NetworkShape shape, double Step);
-	vector<INetwork*> GetNetworks() override;
+	vector<Network*> GetNetworks() override;
 	void Evolve();
 };
 
@@ -32,8 +32,8 @@ void BackPropagateNetworkCollection::Evolve()
 {
 }
 
-vector<INetwork*> BackPropagateNetworkCollection::GetNetworks()
+vector<Network*> BackPropagateNetworkCollection::GetNetworks()
 {
-	vector<INetwork*> net(nets.begin(), nets.end());
+	vector<Network*> net(nets.begin(), nets.end());
 	return net;
 }
