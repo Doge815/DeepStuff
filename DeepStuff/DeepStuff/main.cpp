@@ -10,7 +10,8 @@ int main()
 	//Mnist::NetworkTester();
 	//(*Mnist::CreateAverageReader()).Serialize("o.utput");
 	Network n = Network::Deserialize("o.utput");
-	Mnist::NetworkTester(n);
+	Mnist::RecognizeInput(n);
+	//Mnist::NetworkTester(n);
 	getchar();
 	return 0;
 }

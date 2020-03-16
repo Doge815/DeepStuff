@@ -20,14 +20,13 @@ protected:
 public:
 	Network();
 	virtual vector<double> Evaluate(vector<double> values);
+	virtual bool CheckNetwork();
 
 	static Network Deserialize(string path);
 	void Serialize(string path);
 };
 
-Network::Network()
-{
-}
+Network::Network() { }
 
 vector<double> Network::Evaluate(vector<double> input)
 {
@@ -39,6 +38,21 @@ vector<double> Network::Evaluate(vector<double> input)
 	}
 
 	return current;
+}
+
+bool Network::CheckNetwork()
+{
+	for(int i = 0; i < Layers.size(); i++)
+	{
+		Layer* l = Layers[i];
+		vector<vector<double>> weights = l->GetWeights();
+		if(l->OutputSize != weights.size()) return false;
+		for (int u = 0; u < l->OutputSize; u++)
+		{
+			if(l->InputSize != weights[u].size()) return false;
+		}
+	}
+	return true;
 }
 
 void Network::Serialize(string path)
@@ -107,10 +121,10 @@ Network Network::Deserialize(string path)
 		{
 			n.Layers.push_back(Layers[i]);
 		}
-		return n;
+		if(n.CheckNetwork()) return n;
 	}
 	catch(const std::exception & e)
 	{
-
+		throw e;
 	}
 }

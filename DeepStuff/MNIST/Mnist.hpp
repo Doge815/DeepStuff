@@ -27,6 +27,7 @@ public:
 
 	static Network* CreateAverageReader(bool verbosity = true);
 	static void NetworkTester(Network network);
+	static void RecognizeInput(Network network);
 	static void ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector);
 	static void RenderImage(sf::RenderWindow* window, vector<uint8_t> image);
 };
@@ -99,6 +100,28 @@ Network* Mnist::CreateAverageReader(bool verbosity)
 			}
 			detected = 0;
 		}
+	}
+}
+
+void Mnist::RecognizeInput(Network network)
+{
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
+	vector<uint8_t> image = vector<uint8_t>(ImageSize * ImageSize);
+	for (size_t i = 0; i < ImageSize*ImageSize; i++)
+	{
+		image[i] = 0;
+	}
+	
+	while (true)
+	{
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			sf::Vector2i pos = sf::Mouse::getPosition();
+			size_t y = pos.y / SizeMultiplier;
+			size_t x = pos.x / SizeMultiplier;
+			image[ImageSize*y + x] = 255;
+		}
+		RenderImage(window, image);
 	}
 }
 
