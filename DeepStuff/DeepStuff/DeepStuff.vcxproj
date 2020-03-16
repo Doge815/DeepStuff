@@ -161,6 +161,9 @@
     <ClInclude Include="..\NeuralNetwork\Base\Activation.hpp" />
     <ClInclude Include="..\NeuralNetwork\Base\LayerShape.hpp" />
     <ClInclude Include="..\NeuralNetwork\Base\NetworkShape.hpp" />
+    <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionCollection.hpp" />
+    <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionLayer.hpp" />
+    <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionNetwork.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

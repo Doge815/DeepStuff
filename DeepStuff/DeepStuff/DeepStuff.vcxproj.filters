@@ -34,6 +34,9 @@
     <Filter Include="Header Files\NeuralNetwork\BaseNetwork">
       <UniqueIdentifier>{4d705e16-88e1-4514-b266-67c0e4a663ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\NeuralNetwork\Evolution">
+      <UniqueIdentifier>{db708ff3-8964-4ccb-b387-d3be3f649870}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +85,15 @@
     </ClInclude>
     <ClInclude Include="..\Extensions\Extensions.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionCollection.hpp">
+      <Filter>Header Files\NeuralNetwork\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionLayer.hpp">
+      <Filter>Header Files\NeuralNetwork\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionNetwork.hpp">
+      <Filter>Header Files\NeuralNetwork\Evolution</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
