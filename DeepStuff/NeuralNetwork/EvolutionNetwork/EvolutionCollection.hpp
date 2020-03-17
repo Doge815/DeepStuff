@@ -31,6 +31,15 @@ public:
 	void Evolve();
 };
 
+EvolutionCollection::EvolutionCollection(int amount, NetworkShape shape, EvolutionProperties Properties)
+{
+	props = Properties;
+	nets = vector<EvolutionNetwork*>();
+
+	for (int i = 0; i < amount; i++)
+	{
+		nets.push_back(new EvolutionNetwork)
+
 void EvolutionCollection::Evolve()
 {
 	std::sort(nets.begin(), nets.end());
