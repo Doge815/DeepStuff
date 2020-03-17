@@ -1,105 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Activation">
-    <Position X="2" Y="8" Width="1.5" />
+    <Position X="11" Y="7.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAgAQAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\Base\Activation.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ReLU">
-    <Position X="4.5" Y="7.75" Width="1.5" />
+    <Position X="13" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAgAQAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\Base\Activation.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sigmoid">
-    <Position X="4.5" Y="9.75" Width="1.5" />
+    <Position X="11" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAgAQAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\Base\Activation.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LayerShape" Collapsed="true">
-    <Position X="9.75" Y="0.5" Width="1.5" />
+  <Class Name="LayerShape">
+    <Position X="11" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAJAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\Base\LayerShape.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="NetworkShape" Collapsed="true">
-    <Position X="9.75" Y="1.5" Width="1.5" />
+  <Class Name="NetworkShape">
+    <Position X="11" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAABAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\Base\NetworkShape.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BackPropagateNetwork">
-    <Position X="4.5" Y="5.5" Width="2" />
+    <Position X="2" Y="7" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAIAAAgAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BackPropagateNetwork\BackPropagateNetwork.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="BackPropagateNetworkCollection" Collapsed="true">
-    <Position X="14.75" Y="6.25" Width="1.5" />
+  <Class Name="BackPropagateNetworkCollection">
+    <Position X="8.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAICAAAAAAAAAAAAAAIAAAAAABAAA=</HashCode>
+      <HashCode>AAIAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkCollection.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BackPropagateNetworkLayer">
-    <Position X="3.75" Y="0.5" Width="1.5" />
+    <Position X="6.5" Y="4.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BackPropagateNetwork\BackPropagateLayer.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Layer">
-    <Position X="1.25" Y="0.5" Width="1.5" />
+    <Position X="4.25" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAQAAAAAAAAAAAACAQgIAAABAAAAEAEAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BaseNetwork\Layer.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Network">
-    <Position X="1.25" Y="3.75" Width="2.5" />
+    <Position X="2" Y="3.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAACBAAAAEAAAAAASAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BaseNetwork\Network.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="NetworkCollection" Collapsed="true">
-    <Position X="14.75" Y="5" Width="1.5" />
+    <Position X="8.25" Y="1" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BaseNetwork\NetworkCollection.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvolutionNetwork">
-    <Position X="4.5" Y="3.75" Width="1.5" />
+  <Class Name="EvolutionCollection">
+    <Position X="6.25" Y="2" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAACAAAAAIAAAQAABAAA=</HashCode>
+      <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\EvolutionNetwork\EvolutionCollection.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvolutionLayer">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\EvolutionNetwork\EvolutionLayer.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EvolutionNetwork">
+    <Position X="4.25" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAQAAAAAAAAAAIAAAACAAgAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\EvolutionNetwork\EvolutionNetwork.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Approximation" Collapsed="true">
-    <Position X="11.5" Y="2" Width="1.5" />
+  <Class Name="Approximation">
+    <Position X="7" Y="8.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\Approximation\Approximation.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Mnist">
-    <Position X="11.5" Y="2.75" Width="2" />
+    <Position X="9" Y="7" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAABCAgAAAAAAAAAAAAAAAAABAAAQAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\Mnist\Mnist.hpp</FileName>
     </TypeIdentifier>
   </Class>
+  <Struct Name="EvolutionProperties">
+    <Position X="7" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\EvolutionNetwork\EvolutionCollection.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
   <Struct Name="mnist::MNIST_dataset&lt;Container&lt;...&gt;, Image, Label&gt;">
-    <Position X="9" Y="3" Width="1.75" />
+    <Position X="2.5" Y="0.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAEAAAEAAAAAQAAAAAAAAAAAAAEBAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\Mnist\Reader\mnist_reader.hpp</FileName>
