@@ -14,8 +14,9 @@ using namespace std;
 
 struct EvolutionProperties
 {
-	int SurvivalRate;
+	double SurvivalRate;
 	double MaxEvolution;
+	EvolutionProperties(int survivalRate, double maxEvolution) { SurvivalRate = survivalRate; MaxEvolution = maxEvolution; }
 };
 
 
@@ -31,9 +32,9 @@ public:
 	void Evolve();
 };
 
-EvolutionCollection::EvolutionCollection(int amount, NetworkShape shape, EvolutionProperties Properties)
+EvolutionCollection::EvolutionCollection(int amount, NetworkShape shape, EvolutionProperties properties)
 {
-	props = Properties;
+	props = properties;
 	nets = vector<EvolutionNetwork*>();
 
 	for (int i = 0; i < amount; i++)
@@ -46,17 +47,23 @@ void EvolutionCollection::Evolve()
 {
 	std::sort(nets.begin(), nets.end());
 
-	vector<EvolutionNetwork*> TheChosenOnes(nets.begin(), nets.begin() + (props.SurvivalRate / nets.size()));
+	vector<EvolutionNetwork*> TheChosenOnes(nets.begin(), nets.begin() + (props.SurvivalRate * nets.size()));
 
 	int size = nets.size();
 	nets.clear(); //Todo: collect
 
-	for (int i = 0; i < TheChosenOnes.size(); i++)	//Todo: fix rounds
+	for (int i = 0; i < 1 / props.SurvivalRate; i++)	//Todo: fix rounds
 	{
 		for (int u = 0; u < ceil(size / props.SurvivalRate); u++)
 		{
 			nets.push_back(TheChosenOnes[i]->DeepCopy());
 		}
+	}
+
+	for (int i = 0; i < nets.size(); i++)
+	{
+		double rand = (((double)std::rand()) / RAND_MAX * 2 - 1) * (props.MaxEvolution - 1) + 1;
+		nets[i]->Mutate(rand);
 	}
 }
 

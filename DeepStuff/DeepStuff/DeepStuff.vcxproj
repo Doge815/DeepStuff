@@ -149,6 +149,12 @@
   <ItemGroup>
     <ClInclude Include="..\Approximation\Approximation.hpp" />
     <ClInclude Include="..\Extensions\Extensions.hpp" />
+    <ClInclude Include="..\FlappyDeep2\Bird.hpp" />
+    <ClInclude Include="..\FlappyDeep2\BirdBrain.hpp" />
+    <ClInclude Include="..\FlappyDeep2\Constants.hpp" />
+    <ClInclude Include="..\FlappyDeep2\Container.hpp" />
+    <ClInclude Include="..\FlappyDeep2\Game.hpp" />
+    <ClInclude Include="..\FlappyDeep2\Pipe.hpp" />
     <ClInclude Include="..\Mnist\Mnist.hpp" />
     <ClInclude Include="..\Mnist\Reader\mnist_reader.hpp" />
     <ClInclude Include="..\Mnist\Reader\mnist_reader_common.hpp" />

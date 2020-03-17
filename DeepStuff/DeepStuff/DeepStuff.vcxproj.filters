@@ -37,6 +37,9 @@
     <Filter Include="Header Files\NeuralNetwork\Evolution">
       <UniqueIdentifier>{db708ff3-8964-4ccb-b387-d3be3f649870}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\FlappyDeep2">
+      <UniqueIdentifier>{7dae756d-b717-45f6-bbbc-4528bb1b37f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -94,6 +97,24 @@
     </ClInclude>
     <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionNetwork.hpp">
       <Filter>Header Files\NeuralNetwork\Evolution</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlappyDeep2\Bird.hpp">
+      <Filter>Header Files\FlappyDeep2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlappyDeep2\BirdBrain.hpp">
+      <Filter>Header Files\FlappyDeep2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlappyDeep2\Constants.hpp">
+      <Filter>Header Files\FlappyDeep2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlappyDeep2\Container.hpp">
+      <Filter>Header Files\FlappyDeep2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlappyDeep2\Game.hpp">
+      <Filter>Header Files\FlappyDeep2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\FlappyDeep2\Pipe.hpp">
+      <Filter>Header Files\FlappyDeep2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
