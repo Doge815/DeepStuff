@@ -107,19 +107,47 @@ void Mnist::RecognizeInput(Network network)
 {
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
 	vector<uint8_t> image = vector<uint8_t>(ImageSize * ImageSize);
-	for (size_t i = 0; i < ImageSize*ImageSize; i++)
+	
+	for (size_t i = 0; i < ImageSize * ImageSize; i++)
 	{
 		image[i] = 0;
 	}
-	
+
 	while (true)
 	{
 		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			sf::Vector2i pos = sf::Mouse::getPosition();
+			sf::Vector2i pos = sf::Mouse::getPosition(*window);
 			size_t y = pos.y / SizeMultiplier;
 			size_t x = pos.x / SizeMultiplier;
 			image[ImageSize*y + x] = 255;
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))
+		{
+			for (size_t i = 0; i < ImageSize * ImageSize; i++)
+			{
+				image[i] = 0;
+			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+		{
+			vector<double> input(image.begin(), image.end());
+
+			vector<double> outputVector = network.Evaluate(input);
+
+			int output = -1;
+			double outputVal = -1;
+			for (int u = 0; u < outputVector.size(); u++)
+			{
+				if (outputVector[u] > outputVal)
+				{
+					outputVal = outputVector[u];
+					output = u;
+				}
+			}
+			ConsoleOutput(NULL, NULL, &output, NULL, NULL, NULL, &outputVector);
 		}
 		RenderImage(window, image);
 	}
