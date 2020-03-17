@@ -7,6 +7,7 @@ class EvolutionLayer : public Layer
 public:
 	EvolutionLayer(int inputSize, int outputSize, Activation* func, double WeightBaseMultiplier);
 	void Mutate(double MutationRate);
+	EvolutionLayer* DeepCopy();
 };
 
 void EvolutionLayer::Mutate(double MutationRate)
@@ -33,6 +34,18 @@ EvolutionLayer::EvolutionLayer(int inputSize, int outputSize, Activation* func, 
 		for (int j = 0; j < inputSize; j++)
 		{
 			Weights[i].push_back(((((double)rand()) / RAND_MAX) * 2 - 1) * WeightBaseMultiplier);
+		}
+	}
+}
+
+EvolutionLayer* EvolutionLayer::DeepCopy()
+{
+	EvolutionLayer* copy = new EvolutionLayer(InputSize, OutputSize, Function, 0);
+	for (int i = 0; i < OutputSize; i++)
+	{
+		for (int u = 0; u < InputSize; u++)
+		{
+			copy->Weights[i][u] = Weights[i][u];
 		}
 	}
 }

@@ -38,7 +38,9 @@ EvolutionCollection::EvolutionCollection(int amount, NetworkShape shape, Evoluti
 
 	for (int i = 0; i < amount; i++)
 	{
-		nets.push_back(new EvolutionNetwork)
+		nets.push_back(new EvolutionNetwork(shape));
+	}
+}
 
 void EvolutionCollection::Evolve()
 {
@@ -56,4 +58,10 @@ void EvolutionCollection::Evolve()
 			nets.push_back(TheChosenOnes[i]->DeepCopy());
 		}
 	}
+}
+
+vector<Network*> EvolutionCollection::GetNetworks()
+{
+	vector<Network*> net (nets.begin(), nets.end());
+	return net;
 }

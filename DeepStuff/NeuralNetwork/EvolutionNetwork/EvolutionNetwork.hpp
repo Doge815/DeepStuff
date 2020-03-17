@@ -7,7 +7,7 @@
 class EvolutionNetwork : public Network
 {
 private:
-
+	EvolutionNetwork();
 public:
 	double Fitness;
 	EvolutionNetwork(NetworkShape shape);
@@ -16,8 +16,13 @@ public:
 	bool operator < (const EvolutionNetwork& other) const { return Fitness < other.Fitness; }
 };
 
+EvolutionNetwork::EvolutionNetwork()
+{
+}
+
 EvolutionNetwork::EvolutionNetwork(NetworkShape shape)
 {
+	Fitness = 0;
 	Layers = vector<Layer*>();
 
 	for (int i = 0; i < shape.GetShapes().size() - 1; i++)
@@ -32,5 +37,16 @@ void EvolutionNetwork::Mutate(double MutationRate)
 	{
 		EvolutionLayer* l = dynamic_cast<EvolutionLayer*>(Layers[i]);
 		l->Mutate(MutationRate);
+	}
+}
+
+EvolutionNetwork* EvolutionNetwork::DeepCopy() //Todo: use copy constructor instead
+{
+	EvolutionNetwork* copy = new EvolutionNetwork();
+	copy->Fitness = Fitness;
+	for (int i = 0; i < Layers.size(); i++)
+	{
+		EvolutionLayer* l = dynamic_cast<EvolutionLayer*>(Layers[i]);
+		copy->Layers.push_back(l->DeepCopy());
 	}
 }
