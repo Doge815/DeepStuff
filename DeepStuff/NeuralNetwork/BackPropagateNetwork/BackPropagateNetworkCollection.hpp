@@ -10,14 +10,13 @@
 
 using namespace std;
 
-class BackPropagateNetworkCollection : public NeuralNetworkCollection
+class BackPropagateNetworkCollection : public NetworkCollection
 {
+private:
 	vector<BackPropagateNetwork*> nets;
-	int amountOfNetworks;
 public:
 	BackPropagateNetworkCollection(int amount, NetworkShape shape, double Step);
 	vector<Network*> GetNetworks() override;
-	void Evolve();
 };
 
 BackPropagateNetworkCollection::BackPropagateNetworkCollection(int amount, NetworkShape shape, double Step)
@@ -27,10 +26,6 @@ BackPropagateNetworkCollection::BackPropagateNetworkCollection(int amount, Netwo
 	{
 		nets.push_back(new BackPropagateNetwork(shape, Step));
 	}
-}
-
-void BackPropagateNetworkCollection::Evolve()
-{
 }
 
 vector<Network*> BackPropagateNetworkCollection::GetNetworks()

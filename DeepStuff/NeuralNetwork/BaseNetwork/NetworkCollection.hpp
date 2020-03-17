@@ -6,9 +6,8 @@
 
 using namespace std;
 
-class NeuralNetworkCollection
+class NetworkCollection
 {
 public:
 	virtual vector<Network*> GetNetworks() = 0;
-	virtual void Evolve() = 0;
 };
