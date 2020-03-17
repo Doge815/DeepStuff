@@ -18,6 +18,7 @@ public:
 
 EvolutionNetwork::EvolutionNetwork()
 {
+	Fitness = 0;
 }
 
 EvolutionNetwork::EvolutionNetwork(NetworkShape shape)
