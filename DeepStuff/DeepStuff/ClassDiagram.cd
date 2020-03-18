@@ -77,7 +77,7 @@
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BaseNetwork\NetworkCollection.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvolutionCollection" Collapsed="true">
+  <Class Name="EvolutionCollection">
     <Position X="7.75" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAACAAAAAIAAAQAABAAA=</HashCode>
