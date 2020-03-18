@@ -77,7 +77,7 @@
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\BaseNetwork\NetworkCollection.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EvolutionCollection">
+  <Class Name="EvolutionCollection" Collapsed="true">
     <Position X="7.75" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAACAAAAAIAAAQAABAAA=</HashCode>
@@ -115,7 +115,7 @@
   <Struct Name="EvolutionProperties">
     <Position X="12.75" Y="11" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAAAIAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\Johannes\git\DeepStuff\DeepStuff\NeuralNetwork\EvolutionNetwork\EvolutionCollection.hpp</FileName>
     </TypeIdentifier>
   </Struct>
