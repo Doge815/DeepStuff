@@ -31,40 +31,48 @@ class Game
 		void SpawnPipe();
 	public:
 		
-		Game(sf::RenderWindow* rw);
+		Game();
 		void Render();
 		void Update();
 		void ReStart();
 		
 };
 
-Game::Game(sf::RenderWindow* rw)
+Game::Game()
 {
-	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 4, 1),
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(SizeX, SizeY), "FlappyDeep2", sf::Style::Titlebar | sf::Style::Close);
+	window->setFramerateLimit(FPS);
+
+	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 3, 1),
 									 LayerShape((Activation*)(new ReLU()), 5, 1),
 									 LayerShape((Activation*)(new ReLU()), 5, 1),
 									 LayerShape((Activation*)(new Sigmoid()), 1, 1) };
 	Collection = EvolutionCollection(100, NetworkShape(size), EvolutionProperties(0.2, 1.3));
 
-	Container::RenderWindow = rw;
-	Container::WindowHeight = rw->getSize().y;
-	Container::WindowWidth = rw->getSize().x;
+	Container::RenderWindow = window;
+	Container::WindowHeight = window->getSize().y;
+	Container::WindowWidth = window->getSize().x;
 
 	Pipe::gap = Container::WindowHeight / 5;
 	Pipe::height = Container::WindowHeight;
-	Pipe::wight = Container::WindowWidth / 20;
+	Pipe::widht = Container::WindowWidth / 20;
 	Pipe::speed = Container::WindowWidth / 100;
 
 	Bird::x = Container::WindowWidth / 10;
 	Bird::height = Container::WindowHeight / 10;
-	Bird::wight = Container ::WindowWidth / 15;
+	Bird::widht = Container ::WindowWidth / 15;
 
 	ReStart();
+	while (true)
+	{
+		Update();
+		Render();
+	}
 }
 
 void Game::Render()
 {
-	#if true
+	Container::RenderWindow->clear(sf::Color::Black);
 	for (size_t i = 0; i < Pipes.size(); i++)
 	{
 		Pipes[i]->Render();
@@ -74,13 +82,12 @@ void Game::Render()
 	{
 		DeadPipes[i]->Render();
 	}
-	#endif
 
 	for (size_t i = 0; i < Birds.size(); i++)
 	{
 		Birds[i]->Render();
 	}
-	
+	Container::RenderWindow->display();
 }
 
 void Game::Update()
@@ -90,12 +97,12 @@ void Game::Update()
 		ReStart();
 		return;
 	}
-
+	/*
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		Birds[0]->Jump();
 	}
-
+	*/
 	PipeSpawnTicker++;
 	if (PipeSpawnTicker == PipeSpawnDuration)
 	{
@@ -106,7 +113,7 @@ void Game::Update()
 	if (!DeadPipes.empty())
 	{
 		Pipe* LeftOne = DeadPipes[0];
-		if (LeftOne->GetX() + Pipe::wight < 0)
+		if (LeftOne->GetX() + Pipe::widht < 0)
 		{
 			DeadPipes.erase(DeadPipes.begin());
 			delete LeftOne;
@@ -130,7 +137,7 @@ void Game::Update()
 			ActivePipe = Pipes[0];
 			ActivePipe->Checked();
 		}
-		if (ActivePipe->GetX() + Pipe::wight < Bird::x)
+		if (ActivePipe->GetX() + Pipe::widht < Bird::x)
 		{
 			Pipes.erase(Pipes.begin());
 			DeadPipes.push_back(ActivePipe);
@@ -141,7 +148,7 @@ void Game::Update()
 
 	if(ActivePipe != NULL)
 	{
-		if(Bird::wight + Bird::x > ActivePipe->GetX())
+		if(Bird::widht + Bird::x > ActivePipe->GetX())
 		{
 			for (size_t i = 0; i < Birds.size(); i++)
 			{
@@ -149,6 +156,8 @@ void Game::Update()
 			}
 		}
 	}
+
+	vector<Network*> n = Collection.GetNetworks();
 
 	for (size_t i = 0; i < Birds.size(); i++)
 	{
@@ -160,7 +169,10 @@ void Game::Update()
 		}
 		else
 		{
-			Birds[i]->Update();
+			double a = ActivePipe->GetX() + Pipe::widht - Bird::x - Bird::widht;
+			double b = Pipe::speed;
+			EvolutionNetwork* e = dynamic_cast<EvolutionNetwork*>(n[i]);
+			Birds[i]->Update(e, a, b);
 		}
 	}
 	
@@ -199,7 +211,7 @@ void Game::ReStart()
 	PipeSpawnTicker =   0.7f * FPS - 1;
 	PipeSpawnDuration = 0.7f * FPS;
 
-	//NetworkCollection.Evolve();
+	Collection.Evolve();
 
 	Bird* bird = new Bird();
 	Birds.push_back(bird);

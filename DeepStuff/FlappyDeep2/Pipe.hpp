@@ -11,7 +11,7 @@ class Pipe
 		sf::RectangleShape* rs;
 
 	public:
-		static int wight;
+		static int widht;
 		static int height;
 		static int speed;
 		static int gap;
@@ -39,7 +39,7 @@ Pipe::Pipe(int X, int Y)
 	x = X;
 	y = Y;
 	rs = new sf::RectangleShape();
-	rs->setSize(Vector2f(wight, height));
+	rs->setSize(Vector2f(widht, height));
 	rs->setFillColor(Color::Green);
 }
 
@@ -73,7 +73,7 @@ void Pipe::Checked()
 	rs->setFillColor(Color::Blue);
 }
 
-int Pipe::wight;
+int Pipe::widht;
 int Pipe::height;
 int Pipe::gap;
 int Pipe::speed;

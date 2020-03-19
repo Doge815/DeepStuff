@@ -28,7 +28,7 @@ EvolutionNetwork::EvolutionNetwork(NetworkShape shape)
 
 	for (int i = 0; i < shape.GetShapes().size() - 1; i++)
 	{
-		Layers.push_back(new EvolutionLayer(shape.GetShapes()[i].Size, shape.GetShapes()[i + 1].Size, shape.GetShapes()[i + 1].Function, shape.GetShapes()[i + 1].Multiplier));
+		Layers.push_back(new EvolutionLayer(shape.GetShapes()[i].LayerSize, shape.GetShapes()[i + 1].LayerSize, shape.GetShapes()[i + 1].Function, shape.GetShapes()[i + 1].Multiplier));
 	}
 }
 
@@ -50,4 +50,5 @@ EvolutionNetwork* EvolutionNetwork::DeepCopy() //Todo: use copy constructor inst
 		EvolutionLayer* l = dynamic_cast<EvolutionLayer*>(Layers[i]);
 		copy->Layers.push_back(l->DeepCopy());
 	}
+	return copy;
 }

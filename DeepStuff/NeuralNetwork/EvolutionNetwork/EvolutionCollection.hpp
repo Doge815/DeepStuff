@@ -16,6 +16,7 @@ struct EvolutionProperties
 {
 	double SurvivalRate;
 	double MaxEvolution;
+	EvolutionProperties() { SurvivalRate = 0.2; MaxEvolution = 1.3; }
 	EvolutionProperties(int survivalRate, double maxEvolution) { SurvivalRate = survivalRate; MaxEvolution = maxEvolution; }
 };
 
@@ -26,11 +27,16 @@ private:
 	vector<EvolutionNetwork*> nets;
 	EvolutionProperties props;
 public:
-	
+	EvolutionCollection();
 	EvolutionCollection(int amount, NetworkShape shape, EvolutionProperties Properties);
 	vector<Network*> GetNetworks() override;
 	void Evolve();
 };
+
+EvolutionCollection::EvolutionCollection()
+{
+
+}
 
 EvolutionCollection::EvolutionCollection(int amount, NetworkShape shape, EvolutionProperties properties)
 {

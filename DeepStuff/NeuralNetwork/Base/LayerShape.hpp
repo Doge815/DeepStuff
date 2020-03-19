@@ -5,7 +5,7 @@
 class LayerShape
 {
 public:
-	int Size;
+	int LayerSize;
 	double Multiplier;
 	Activation* Function;
 	LayerShape(Activation* func, int size, double multiplier);
@@ -13,7 +13,7 @@ public:
 
 LayerShape::LayerShape(Activation* func, int size, double multiplier)
 {
-	Size = size;
+	LayerSize = size;
 	Function = func;
 	Multiplier = multiplier;
 }

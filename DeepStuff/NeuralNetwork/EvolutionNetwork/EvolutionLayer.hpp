@@ -48,4 +48,5 @@ EvolutionLayer* EvolutionLayer::DeepCopy()
 			copy->Weights[i][u] = Weights[i][u];
 		}
 	}
+	return copy;
 }

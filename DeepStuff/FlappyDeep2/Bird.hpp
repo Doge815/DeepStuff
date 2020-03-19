@@ -1,8 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "../NeuralNetwork/EvolutionNetwork/EvolutionNetwork.hpp"
+
 #include "Container.hpp"
 #include "Pipe.hpp"
+
+#include <iostream>
 
 class Bird
 {
@@ -13,7 +17,7 @@ class Bird
         sf::RectangleShape* rs;
         void Die();
     public:
-        static int wight;
+        static int widht;
 		static int height;
         static int x;
 
@@ -24,6 +28,7 @@ class Bird
         ~Bird();
         void Jump();
         void Update();
+        void Update(EvolutionNetwork* e, double a, double b);
         void Render();
         void CollisionCheck(Pipe* pipe);
         bool IsDead();
@@ -41,7 +46,7 @@ Bird::Bird()
     y = 0 - height / 2;
     Jumpheight = 0;
     rs = new RectangleShape();
-    rs->setSize(Vector2f(wight, height));
+    rs->setSize(Vector2f(widht, height));
     rs->setFillColor(Color::Red);
 } 
 
@@ -58,7 +63,6 @@ void Bird::Jump()
 
 void Bird::CollisionCheck(Pipe* pipe)
 {
-    dead = false;
     if(y + height > pipe->GetY() + pipe->gap || y < pipe->GetY() - pipe->gap)
     {
         dead = true;
@@ -69,9 +73,21 @@ void Bird::Update()
 {
     y -= Jumpheight;
     Jumpheight -= gravity;
+    if (y < -Container::WindowHeight/2 || y+height/2 > Container::WindowHeight / 2)
+    {
+        dead = true;
+    }
 }
 
-int Bird::wight;
+void Bird::Update(EvolutionNetwork* e, double a, double b)
+{
+    vector<double> input = { a, b, (double)Jumpheight };
+    double i = e->Evaluate(input)[0];
+    if (i > 0.5) Jump();
+    Update();
+}
+
+int Bird::widht;
 int Bird::height;
 int Bird::x;
 
