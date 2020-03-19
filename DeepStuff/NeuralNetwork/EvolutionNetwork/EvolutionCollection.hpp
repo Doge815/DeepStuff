@@ -40,7 +40,7 @@ EvolutionCollection::EvolutionCollection()
 
 EvolutionCollection::EvolutionCollection(int amount, NetworkShape shape, EvolutionProperties properties)
 {
-	props = properties;
+	props = EvolutionProperties();
 	nets = vector<EvolutionNetwork*>();
 
 	for (int i = 0; i < amount; i++)

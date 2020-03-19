@@ -150,7 +150,6 @@
     <ClInclude Include="..\Approximation\Approximation.hpp" />
     <ClInclude Include="..\Extensions\Extensions.hpp" />
     <ClInclude Include="..\FlappyDeep2\Bird.hpp" />
-    <ClInclude Include="..\FlappyDeep2\BirdBrain.hpp" />
     <ClInclude Include="..\FlappyDeep2\Constants.hpp" />
     <ClInclude Include="..\FlappyDeep2\Container.hpp" />
     <ClInclude Include="..\FlappyDeep2\Game.hpp" />

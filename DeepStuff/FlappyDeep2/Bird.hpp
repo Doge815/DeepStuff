@@ -15,7 +15,7 @@ class Bird
         int Jumpheight;
         bool dead;
         sf::RectangleShape* rs;
-        void Die();
+        EvolutionNetwork* network;
     public:
         static int widht;
 		static int height;
@@ -24,11 +24,11 @@ class Bird
         static const int gravity = 2;
         static const int jumpPower = 25;
 
-        Bird();
+        Bird(EvolutionNetwork* n);
         ~Bird();
         void Jump();
         void Update();
-        void Update(EvolutionNetwork* e, double a, double b);
+        void Update(double a, double b);
         void Render();
         void CollisionCheck(Pipe* pipe);
         bool IsDead();
@@ -40,8 +40,9 @@ void Bird::Render()
     Container::RenderWindow->draw(*rs);
 }
 
-Bird::Bird()
+Bird::Bird(EvolutionNetwork* n)
 {
+    network = n;
     dead = false;
     y = 0 - height / 2;
     Jumpheight = 0;
@@ -65,6 +66,7 @@ void Bird::CollisionCheck(Pipe* pipe)
 {
     if(y + height > pipe->GetY() + pipe->gap || y < pipe->GetY() - pipe->gap)
     {
+        network->Fitness = Container::Score;
         dead = true;
     }
 }
@@ -75,14 +77,15 @@ void Bird::Update()
     Jumpheight -= gravity;
     if (y < -Container::WindowHeight/2 || y+height/2 > Container::WindowHeight / 2)
     {
+        network->Fitness = Container::Score;
         dead = true;
     }
 }
 
-void Bird::Update(EvolutionNetwork* e, double a, double b)
+void Bird::Update(double a, double b)
 {
     vector<double> input = { a, b, (double)Jumpheight };
-    double i = e->Evaluate(input)[0];
+    double i = network->Evaluate(input)[0];
     if (i > 0.5) Jump();
     Update();
 }

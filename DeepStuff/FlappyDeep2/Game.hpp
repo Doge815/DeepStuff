@@ -94,6 +94,7 @@ void Game::Update()
 {
 	if(Birds.size() == 0)
 	{
+		Collection.Evolve();
 		ReStart();
 		return;
 	}
@@ -136,6 +137,7 @@ void Game::Update()
 		{
 			ActivePipe = Pipes[0];
 			ActivePipe->Checked();
+			Container::Score++;
 		}
 		if (ActivePipe->GetX() + Pipe::widht < Bird::x)
 		{
@@ -156,8 +158,7 @@ void Game::Update()
 			}
 		}
 	}
-
-	vector<Network*> n = Collection.GetNetworks();
+;
 
 	for (size_t i = 0; i < Birds.size(); i++)
 	{
@@ -171,8 +172,8 @@ void Game::Update()
 		{
 			double a = ActivePipe->GetX() + Pipe::widht - Bird::x - Bird::widht;
 			double b = Pipe::speed;
-			EvolutionNetwork* e = dynamic_cast<EvolutionNetwork*>(n[i]);
-			Birds[i]->Update(e, a, b);
+			
+			Birds[i]->Update(a, b);
 		}
 	}
 	
@@ -202,6 +203,8 @@ void Game::ReStart()
 		delete Deadbirds[i];
 	}
 
+	Container::Score = 0;
+
 	Pipes = vector<Pipe*>();
 	DeadPipes = vector<Pipe*>();
 	ActivePipe = NULL;
@@ -211,10 +214,14 @@ void Game::ReStart()
 	PipeSpawnTicker =   0.7f * FPS - 1;
 	PipeSpawnDuration = 0.7f * FPS;
 
-	Collection.Evolve();
+	vector<Network*> n = Collection.GetNetworks();
 
-	Bird* bird = new Bird();
-	Birds.push_back(bird);
+	for (int i = 0; i < 100; i++)
+	{
+		EvolutionNetwork* e = dynamic_cast<EvolutionNetwork*>(n[i]);
+		Bird* bird = new Bird(e);
+		Birds.push_back(bird);
+	}
 }
 
 

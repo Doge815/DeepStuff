@@ -101,9 +101,6 @@
     <ClInclude Include="..\FlappyDeep2\Bird.hpp">
       <Filter>Header Files\FlappyDeep2</Filter>
     </ClInclude>
-    <ClInclude Include="..\FlappyDeep2\BirdBrain.hpp">
-      <Filter>Header Files\FlappyDeep2</Filter>
-    </ClInclude>
     <ClInclude Include="..\FlappyDeep2\Constants.hpp">
       <Filter>Header Files\FlappyDeep2</Filter>
     </ClInclude>
