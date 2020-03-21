@@ -56,6 +56,10 @@ void EvolutionCollection::Evolve()
 	vector<EvolutionNetwork*> TheChosenOnes(nets.begin(), nets.begin() + (props.SurvivalRate * nets.size()));
 
 	int size = nets.size();
+	for (int i = 0; i < size; i++)
+	{
+		delete nets[i];
+	}
 	nets.clear(); //Todo: collect
 
 	for (int i = 0; i < 1 / props.SurvivalRate; i++)	//Todo: fix rounds

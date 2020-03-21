@@ -216,7 +216,7 @@ void Game::ReStart()
 
 	vector<Network*> n = Collection.GetNetworks();
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < n.size(); i++)
 	{
 		EvolutionNetwork* e = dynamic_cast<EvolutionNetwork*>(n[i]);
 		Bird* bird = new Bird(e);
