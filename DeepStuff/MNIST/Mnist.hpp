@@ -145,14 +145,14 @@ Network* Mnist::CreateAverageNumberGenerator(bool verbosity)
 	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
 	BackPropagateNetwork* network = dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
 
-	for (int i = 0; true; i++)
+	for (size_t i = 0; true; i++)
 	{
 		if (i == dataset.training_images.size())
 		{
 			i = 0;
 		}
 		vector<double> input = vector<double>();
-		for (int i = 0; i < 10; i++)
+		for (int u = 0; u < 10; u++)
 		{
 			input.push_back(0);
 		}
@@ -161,9 +161,13 @@ Network* Mnist::CreateAverageNumberGenerator(bool verbosity)
 		if (i % Skip == 0)
 		{
 			vector<double> RawOutputVector = network->Evaluate(input);
-			vector<uint8_t> OutputVector(RawOutputVector.begin(), RawOutputVector.end());
+			vector<uint8_t> OutputVector = vector<uint8_t>();
+			for (size_t u = 0; u < RawOutputVector.size(); u++)
+			{
+				OutputVector.push_back((uint8_t)RawOutputVector[u]);
+			}
 			ClearConsole();
-			cout <<"number: " << dataset.training_labels[i] << endl;
+			cout <<"number: " << unsigned(dataset.training_labels[i]) << endl;
 			RenderImage(window, OutputVector);
 		}
 
