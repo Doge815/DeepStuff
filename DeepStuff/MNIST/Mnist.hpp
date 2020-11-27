@@ -52,6 +52,7 @@ public:
 	static mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset;
 
 	static Network* CreateAverageReader(bool verbosity = true);
+	static Network* CreateAverageNumberGenerator(bool verbosity = true);
 	static void NetworkTester(Network network);
 	static void RecognizeInput(Network network);
 	static void ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector);
@@ -127,6 +128,54 @@ Network* Mnist::CreateAverageReader(bool verbosity)
 			detected = 0;
 		}
 	}
+}
+
+Network* Mnist::CreateAverageNumberGenerator(bool verbosity)
+{
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(Size, Size), "Mnist", sf::Style::Titlebar | sf::Style::Close);
+
+	std::vector<LayerShape> size = { LayerShape((Activation*)(new ReLU()), 10, 0.001),
+									 LayerShape((Activation*)(new ReLU()), 800, 0.001),
+									 LayerShape((Activation*)(new ReLU()), 800, 0.001),
+									 LayerShape((Activation*)(new ReLU()), 1600, 0.001),
+									 LayerShape((Activation*)(new Sigmoid()), 784, 0.001) };
+
+	NetworkShape shape = NetworkShape(size);
+
+	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
+	BackPropagateNetwork* network = dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
+
+	for (size_t i = 0; true; i++)
+	{
+		if (i == dataset.training_images.size())
+		{
+			i = 0;
+		}
+		vector<double> input = vector<double>();
+		for (int u = 0; u < 10; u++)
+		{
+			input.push_back(0);
+		}
+		input[dataset.training_labels[i]] = 1;
+
+		if (i % Skip == 0)
+		{
+			vector<double> RawOutputVector = network->Evaluate(input);
+			vector<uint8_t> OutputVector = vector<uint8_t>();
+			for (size_t u = 0; u < RawOutputVector.size(); u++)
+			{
+				OutputVector.push_back((uint8_t)RawOutputVector[u]);
+			}
+			ClearConsole();
+			cout <<"number: " << unsigned(dataset.training_labels[i]) << endl;
+			RenderImage(window, OutputVector);
+		}
+
+		vector<uint8_t> RawExpectedOutout = dataset.training_images[i];
+		vector<double> expectedOutput(RawExpectedOutout.begin(), RawExpectedOutout.end());
+		network->Learn(input, expectedOutput);
+	}
+	return network;
 }
 
 void Mnist::RecognizeInput(Network network)
@@ -220,8 +269,7 @@ mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> Mnist::dataset 
 
 void Mnist::ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector)
 {
-	//std::cout << "\033[2J\033[1;1H";
-	ClearScreen();
+	ClearConsole();
 	if(CurrentIteration != NULL)
 		std::cout << "image number: " + to_string(*CurrentIteration) << std::endl;
 	if (expectedOutput!= NULL)
