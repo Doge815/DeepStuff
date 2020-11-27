@@ -38,52 +38,57 @@ class QTable
 {
 private:
     uint32_t inputSize;
-    unordered_map<ArrayWrapper<I>, uint32_t> Table;
+    uint32_t outputPossibillities;
+    unordered_map<ArrayWrapper<I>, ArrayWrapper<uint32_t>> Table;
 public:
-    QTable(uint32_t size, tuple<int, int> ranges);
-    QTable(uint32_t size, ArrayWrapper<I>* values);
+    QTable(uint32_t size, tuple<int, int> ranges, int32_t possibilities);
+    QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibilities);
 };
 
 template <typename I>
-QTable<I>::QTable(uint32_t size, ArrayWrapper<I>* values)
+QTable<I>::QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibillities)
 {
-    /*
-    int p_size = 1;
-    for (int i = 0; i < size; i++)
-    {
-        p_size *= values->size;
-    }
-
-    I* comb = malloc(p_size * sizeof(I*));
-
-    for (int i = 0; i < size; i++)
-    {
-        p_size /= values->size;
-
-        for (int j = 0; j < values->size; j++)
-        {
-            for (int k = 0; k < p_size; k++)
-            {
-                int pos = 
-            }
-        }
-    }
-    */
-    int blocksize = size * sizeof(ArrayWrapper<I>);
     int blocks = 1;
+    
     for (int i = 0; i < size; i++)
     {
-        p_size *= values->size;
+        //Todo: check size > 1
+        p_size *= values[i].size;
     }
 
     ArrayWrapper<int> pos = ArrayWrapper(size);
     for (int i = 0; i < size; i++)
     {
-        pos->values[i] = 0;
+        pos.values[i] = 0;
     }
+
+    ArrayWrapper<int> step = ArrayWrapper(size);
+    step[size - 1] = 1;
+    for (int i = size - 2; i >= 0; i--)
+    {
+        step[i] = step[i + 1] * values[i].size;
+    }
+
+    ArrayWrapper<I>* pres = new ArrayWrapper(blocks);
 
     for (int i = 0; i < blocks; i++)
     {
+        int blockpos = 0;
+        pos.values[pos.size - 1]++;
+        for (int j = pos.size - 1; j >= 0; j--)
+        {
+            if (pos[j] == values[j].size)
+            {
+                pos[j] = 0;
+                pos[j - 1]++;
+            }
 
+            blockpos += pos[j] * step[j];
+        }
+        pres[blockpos] = ArrayWrapper(size);
+        for (int j = 0; j < size; j++)
+        {
+            pres[blockpos].values[j] = values[j].values[pos[j]];
+        }
     }
 }

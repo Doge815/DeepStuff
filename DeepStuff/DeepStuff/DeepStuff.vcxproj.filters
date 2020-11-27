@@ -116,10 +116,10 @@
     <ClInclude Include="..\FlappyDeep2\Pipe.hpp">
       <Filter>Header Files\FlappyDeep2</Filter>
     </ClInclude>
-    <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Table.hpp">
-      <Filter>Header Files\NeuralNetwork</Filter>
-    </ClInclude>
     <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Learning.hpp">
+      <Filter>Header Files\NeuralNetwork\Q-Learning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Table.hpp">
       <Filter>Header Files\NeuralNetwork\Q-Learning</Filter>
     </ClInclude>
   </ItemGroup>
