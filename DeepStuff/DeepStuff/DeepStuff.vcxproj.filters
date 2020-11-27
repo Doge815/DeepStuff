@@ -47,9 +47,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetworkCollection.hpp">
-      <Filter>Header Files\NeuralNetwork\BackPropagate</Filter>
-    </ClInclude>
     <ClInclude Include="..\NeuralNetwork\BackPropagateNetwork\BackPropagateNetwork.hpp">
       <Filter>Header Files\NeuralNetwork\BackPropagate</Filter>
     </ClInclude>

@@ -8,7 +8,6 @@
 #include "../NeuralNetwork/BaseNetwork/Network.hpp"
 #include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
-#include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
 #include "Reader/mnist_reader.hpp"
 
 #include <vector>
@@ -67,9 +66,8 @@ Network* Mnist::CreateAverageReader(bool verbosity)
 
 	NetworkShape shape = NetworkShape(size);
 
-	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	BackPropagateNetwork* network = dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
-	
+	BackPropagateNetwork* network = new BackPropagateNetwork(shape, 0.0001);
+
 	int detected = 0;
 	for (int i = 0; true; i++)
 	{
@@ -142,8 +140,7 @@ Network* Mnist::CreateAverageNumberGenerator(bool verbosity)
 
 	NetworkShape shape = NetworkShape(size);
 
-	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	BackPropagateNetwork* network = dynamic_cast<BackPropagateNetwork*>(collection.GetNetworks()[0]);
+	BackPropagateNetwork* network = new BackPropagateNetwork(shape, 0.0001);
 
 	for (size_t i = 0; true; i++)
 	{
@@ -166,7 +163,7 @@ Network* Mnist::CreateAverageNumberGenerator(bool verbosity)
 			{
 				OutputVector.push_back((uint8_t)RawOutputVector[u]);
 			}
-			ClearConsole();
+			ClearScreen();
 			cout <<"number: " << unsigned(dataset.training_labels[i]) << endl;
 			RenderImage(window, OutputVector);
 		}
@@ -269,7 +266,7 @@ mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> Mnist::dataset 
 
 void Mnist::ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector)
 {
-	ClearConsole();
+	ClearScreen();
 	if(CurrentIteration != NULL)
 		std::cout << "image number: " + to_string(*CurrentIteration) << std::endl;
 	if (expectedOutput!= NULL)

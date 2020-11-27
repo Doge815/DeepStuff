@@ -3,7 +3,6 @@
 #include "../NeuralNetwork/Base/LayerShape.hpp"
 #include "../NeuralNetwork/Base/NetworkShape.hpp"
 #include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetwork.hpp"
-#include "../NeuralNetwork/BackPropagateNetwork/BackPropagateNetworkCollection.hpp"
 
 #include <iostream>
 #include <vector>
@@ -25,8 +24,7 @@ void Approximation::Approximator()
 									LayerShape((Activation*)(new ReLU()), 1, 1) };
 	NetworkShape shape = NetworkShape(size);
 
-	BackPropagateNetworkCollection collection = BackPropagateNetworkCollection(1, shape, 0.0001);
-	BackPropagateNetwork network = dynamic_cast<BackPropagateNetwork&>(*collection.GetNetworks()[0]);
+	BackPropagateNetwork network = BackPropagateNetwork(shape, 0.0001);
 
 	while (true)
 	{
