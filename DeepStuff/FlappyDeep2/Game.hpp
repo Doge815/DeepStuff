@@ -211,8 +211,8 @@ void Game::ReStart()
 	Birds = vector<Bird*>();
 	Deadbirds = vector<Bird*>();
 
-	PipeSpawnTicker =   0.7f * FPS - 1;
-	PipeSpawnDuration = 0.7f * FPS;
+	PipeSpawnTicker =   (int)(0.7f * FPS - 1);
+	PipeSpawnDuration = (int)(0.7f * FPS);
 
 	vector<Network*> n = Collection.GetNetworks();
 

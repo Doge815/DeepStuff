@@ -29,7 +29,7 @@ BackPropagateNetwork::BackPropagateNetwork(NetworkShape shape, double step)
 
 	for (int i = 0; i < shape.GetShapes().size() - 1; i++)
 	{
-		Layers.push_back(new BackPropagateNetworkLayer(shape.GetShapes()[i].LayerSize, shape.GetShapes()[i + 1].LayerSize, shape.GetShapes()[i + 1].Function, shape.GetShapes()[i + 1].Multiplier));
+		Layers.push_back(new BackPropagateNetworkLayer(shape.GetShapes()[i].LayerSize, shape.GetShapes()[(int64_t)i + 1].LayerSize, shape.GetShapes()[(int64_t)i + 1].Function, shape.GetShapes()[(int64_t)i + 1].Multiplier));
 	}
 }
 
@@ -54,9 +54,9 @@ double BackPropagateNetwork::Learn(vector<double> input, vector<double> expected
 
 	error /= input.size();
 
-	for (int u = Layers.size() - 1; u >= 0; u--)
+	for (int u = (int)Layers.size() - 1; u >= 0; u--)
 	{
-		vector<double> b = Layers[u]->Function->ActivationInverse(Iout[u + 1]);
+		vector<double> b = Layers[u]->Function->ActivationInverse(Iout[(int64_t)u + 1]);
 		BackPropagateNetworkLayer* l = dynamic_cast<BackPropagateNetworkLayer*>(Layers[u]);
 		errorSignal = l->Train(errorSignal, Iout[u], b, Step);
 	}

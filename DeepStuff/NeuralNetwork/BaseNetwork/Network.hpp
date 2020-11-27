@@ -122,6 +122,7 @@ Network Network::Deserialize(string path)
 			n.Layers.push_back(Layers[i]);
 		}
 		if(n.CheckNetwork()) return n;
+		throw new std::exception;
 	}
 	catch(const std::exception & e)
 	{

@@ -53,9 +53,9 @@ void EvolutionCollection::Evolve()
 {
 	std::sort(nets.begin(), nets.end());
 
-	vector<EvolutionNetwork*> TheChosenOnes(nets.begin(), nets.begin() + (props.SurvivalRate * nets.size()));
+	vector<EvolutionNetwork*> TheChosenOnes(nets.begin(), nets.begin() + (int)(props.SurvivalRate * nets.size()));
 
-	int size = nets.size();
+	int size = (int)nets.size();
 	for (int i = 0; i < size; i++)
 	{
 		delete nets[i];

@@ -28,9 +28,9 @@ class Pipe
 
 void Pipe::Render()
 {
-	rs->setPosition(x, y + gap + Container::WindowHeight / 2);
+	rs->setPosition((float)x, (float)y + gap + Container::WindowHeight / 2);
 	Container::RenderWindow->draw(*rs);
-	rs->setPosition(x, y - gap + Container::WindowHeight / 2 - height);
+	rs->setPosition((float)x, (float)y - gap + Container::WindowHeight / 2 - height);
 	Container::RenderWindow->draw(*rs);
 }
 
@@ -39,7 +39,7 @@ Pipe::Pipe(int X, int Y)
 	x = X;
 	y = Y;
 	rs = new sf::RectangleShape();
-	rs->setSize(Vector2f(widht, height));
+	rs->setSize(Vector2f((float)widht, (float)height));
 	rs->setFillColor(Color::Green);
 }
 

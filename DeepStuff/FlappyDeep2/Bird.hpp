@@ -36,7 +36,7 @@ class Bird
 
 void Bird::Render()
 {
-    rs->setPosition(x, y + Container::WindowHeight / 2);
+    rs->setPosition((float)x, (float)y + Container::WindowHeight / 2);
     Container::RenderWindow->draw(*rs);
 }
 
@@ -47,7 +47,7 @@ Bird::Bird(EvolutionNetwork* n)
     y = 0 - height / 2;
     Jumpheight = 0;
     rs = new RectangleShape();
-    rs->setSize(Vector2f(widht, height));
+    rs->setSize(Vector2f((float)widht, (float)height));
     rs->setFillColor(Color::Red);
 } 
 

@@ -28,7 +28,7 @@ EvolutionNetwork::EvolutionNetwork(NetworkShape shape)
 
 	for (int i = 0; i < shape.GetShapes().size() - 1; i++)
 	{
-		Layers.push_back(new EvolutionLayer(shape.GetShapes()[i].LayerSize, shape.GetShapes()[i + 1].LayerSize, shape.GetShapes()[i + 1].Function, shape.GetShapes()[i + 1].Multiplier));
+		Layers.push_back(new EvolutionLayer(shape.GetShapes()[i].LayerSize, shape.GetShapes()[(int64_t)i + 1].LayerSize, shape.GetShapes()[(int64_t)i + 1].Function, shape.GetShapes()[(int64_t)i + 1].Multiplier));
 	}
 }
 
