@@ -39,7 +39,7 @@ class QTable
 private:
     uint32_t inputSize;
     uint32_t outputPossibillities;
-    unordered_map<ArrayWrapper<I>, ArrayWrapper<uint32_t>> Table;
+    unordered_map<ArrayWrapper<I>, ArrayWrapper<double>> Table;
 public:
     QTable(uint32_t size, tuple<int, int> ranges, int32_t possibilities);
     QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibilities);
@@ -69,8 +69,6 @@ QTable<I>::QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibillities
         step[i] = step[i + 1] * values[i].size;
     }
 
-    ArrayWrapper<I>* pres = new ArrayWrapper(blocks);
-
     for (int i = 0; i < blocks; i++)
     {
         int blockpos = 0;
@@ -85,10 +83,21 @@ QTable<I>::QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibillities
 
             blockpos += pos[j] * step[j];
         }
-        pres[blockpos] = ArrayWrapper(size);
+
+
+        ArrayWrapper<I>* currentBlock = new ArrayWrapper<I>(size);
         for (int j = 0; j < size; j++)
         {
-            pres[blockpos].values[j] = values[j].values[pos[j]];
+            currentBlock->values[j] = values[j].values[pos[j]];
         }
+        ArrayWrapper<double>* propabilities = new ArrayWrapper<I>(possibillities);
+        for (int j = 0; j < possibillities; j++)
+        {
+            propabilities->values[j] = ((double)rand() / (RAND_MAX));
+        }
+        Table.insert(&currentBlock, &propabilities);
     }
+
+
+
 }
