@@ -7,15 +7,15 @@
 
 int main()
 {
-#if true
+#if false
 	Game g = Game();
 #elif false
 	Approximation::Approximator();
 
 	#else
-	(*Mnist::CreateAverageReader()).Serialize("o.utput");
+	//(*Mnist::CreateAverageReader()).Serialize("o.utput");
 	Network n = Network::Deserialize("o.utput");
-	Mnist::RecognizeInput(n);
+	//Mnist::RecognizeInput(n);
 	Mnist::NetworkTester(n);
 #endif
 

@@ -18,6 +18,32 @@
 #include <numeric>
 #include <algorithm>
 
+
+#ifdef _WIN64
+#include <stdlib.h>
+
+void ClearScreen()
+{
+	system("cls");
+}
+#else
+#include <unistd.h>
+#include <term.h>
+
+void ClearScreen()
+{
+	if (!cur_term)
+	{
+		int result;
+		setupterm(NULL, STDOUT_FILENO, &result);
+		if (result <= 0) return;
+	}
+
+	putp(tigetstr("clear"));
+}
+#endif
+
+
 int Skip = 100;
 
 class Mnist
@@ -159,12 +185,10 @@ void Mnist::NetworkTester(Network network)
 	
 	int detected = 0;
 	int detectedFrom = 0;
-	for (int i = 0; true; i++)
+	while(true)
 	{
-		if (i == dataset.test_images.size())
-		{
-			i = 0;
-		}
+
+		int i = rand() % dataset.test_images.size();
 		vector<uint8_t> rawInput = dataset.test_images[i];
 		vector<double> input(rawInput.begin(), rawInput.end());
 
@@ -196,7 +220,8 @@ mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> Mnist::dataset 
 
 void Mnist::ConsoleOutput(int* CurrentIteration, int* expectedOutput, int* output, double* error, int* detected, int* detectedFrom, vector<double>* outputVector)
 {
-	std::cout << "\033[2J\033[1;1H";
+	//std::cout << "\033[2J\033[1;1H";
+	ClearScreen();
 	if(CurrentIteration != NULL)
 		std::cout << "image number: " + to_string(*CurrentIteration) << std::endl;
 	if (expectedOutput!= NULL)
