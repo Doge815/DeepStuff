@@ -41,7 +41,7 @@ private:
 	uint32_t outputPossibillities;
 	unordered_map<ArrayWrapper<I>, ArrayWrapper<double>> Table;
 public:
-	QTable(uint32_t size, tuple<int, int> ranges, int32_t possibilities);
+	QTable(uint32_t size, tuple<int, int>* ranges, int32_t possibilities);
 	QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibilities);
 };
 
@@ -97,4 +97,20 @@ QTable<I>::QTable(uint32_t size, ArrayWrapper<I>* values, int32_t possibillities
 		}
 		Table.insert(&currentBlock, &propabilities);
 	}
+}
+
+template <typename I>
+QTable<I>::QTable(uint32_t size, tuple<int, int>* ranges, int32_t possibilities)
+{
+	ArrayWrapper<int>* values = new ArrayWrapper<I>(size);
+	for (uint32_t i = 0; i < size; i++)
+	{
+		values[i] = ArrayWrapper<I>(get<0>(ranges[i]) - get<0>(ranges[i]) + 1)
+		for (int u = get<0>(ranges[i]); u <= get<1>(ranges[i]); u++)
+		{
+
+		}
+	}
+
+	QTable(size, values, possibilities);
 }
