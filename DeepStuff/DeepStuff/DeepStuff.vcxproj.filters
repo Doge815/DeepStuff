@@ -40,6 +40,9 @@
     <Filter Include="Header Files\FlappyDeep2">
       <UniqueIdentifier>{7dae756d-b717-45f6-bbbc-4528bb1b37f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\NeuralNetwork\Q-Learning">
+      <UniqueIdentifier>{be20a8f9-0d9f-45fc-bfe6-e8d827a268d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -109,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="..\FlappyDeep2\Pipe.hpp">
       <Filter>Header Files\FlappyDeep2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Table.hpp">
+      <Filter>Header Files\NeuralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Learning.hpp">
+      <Filter>Header Files\NeuralNetwork\Q-Learning</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

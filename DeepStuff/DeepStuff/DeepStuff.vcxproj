@@ -168,6 +168,8 @@
     <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionCollection.hpp" />
     <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionLayer.hpp" />
     <ClInclude Include="..\NeuralNetwork\EvolutionNetwork\EvolutionNetwork.hpp" />
+    <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Learning.hpp" />
+    <ClInclude Include="..\NeuralNetwork\Q-Learning\Q-Table.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
